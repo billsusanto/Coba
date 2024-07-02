@@ -23,7 +23,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex items-center space-x-10 pr-5">
-            <Link href="/login" className="text-gray-700 border border-customBlue-dark rounded-xl px-4 py-2 sm:w-20 md:w-40 text-center text-xl">
+            <Link href="/login" className="text-gray-700 border border-customBlue-light rounded-xl px-4 py-2 sm:w-20 md:w-40 text-center text-xl">
               Login
             </Link>
             <Link href="/signup" className="bg-gradient-to-r from-customBlue-light via-customBlue to-customBlue-dark text-white rounded-xl px-4 py-2 sm:w-20 md:w-40 text-center text-xl">
