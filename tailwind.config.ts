@@ -15,9 +15,9 @@ const config: Config = {
       },
       colors: {
         customBlue : {
-          'light': '#A5DEF1',
-          'default': '#459BE1',
-          'dark': '#5F60CC',
+          'light': '#AAE2F1',
+          'default': '#4299E0',
+          'dark': '#615ACA',
         },
       },
       fontFamily: {
