@@ -2,3 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes drawLine {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.animate-drawLine {
+  animation: drawLine 0.5s forwards;
+}

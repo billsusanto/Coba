@@ -1,14 +1,13 @@
-import Image from "next/image";
-import Navbar from "@/components/Navbar";
+'use client'
+
 import Landing from "@/components/Landing";
-import StatsComponent from "@/components/StatsComponent";
+import HomePage from "@/components/Home";
 
 export default function Home() {
   return (
     <main>
-      <Navbar />
-      <Landing />
-      <StatsComponent />
+      {/* <Landing /> */}
+      <HomePage />
     </main>
   );
 }

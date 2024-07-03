@@ -20,9 +20,16 @@ const config: Config = {
           'dark': '#615ACA',
         },
       },
-      fontFamily: {
-        outfit: ['Outfit', 'sans-serif'],
-      }
+      height: {
+        'half-screen': '50vh',
+        'one-third-screen': '40vh',
+      },
+      width: {
+        'search-bar': '30vw',
+      },
+      boxShadow: {
+        'blueShadow': '0 8px 20px 5px rgba(66, 153, 225, 0.5), 0 4px 8px 5px rgba(66, 153, 225, 0.3)',
+      },
     },
   },
   plugins: [],
