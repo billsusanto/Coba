@@ -1,11 +1,11 @@
 'use client'
 
-import Landing from "@/components/Landing";
+import Home from "@/components/Home";
 
 export default function App() {
   return (
     <main>
-      <Landing />
+      <Home />
     </main>
   );
 }
