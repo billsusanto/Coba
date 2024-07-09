@@ -1,7 +1,9 @@
 ## Getting Started
 
 First, clone github repository:
+```bash
 git clone https://github.com/billsusanto/Coba.git
+```
 
 Second, install dependencies and packages:
 ```bash
