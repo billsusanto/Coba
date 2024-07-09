@@ -1,10 +1,13 @@
 ## Getting Started
 
-First, install dependencies and packages:
+First, clone github repository:
+git clone https://github.com/billsusanto/Coba.git
+
+Second, install dependencies and packages:
 ```bash
 npm install
 ```
-Second, run the development server:
+Third, run the development server:
 ```bash
 npm run dev
 # or
