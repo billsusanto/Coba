@@ -14,3 +14,15 @@
 .animate-drawLine {
   animation: drawLine 0.5s forwards;
 }
+
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+.translate-y-0 {
+  transform: translateY(0);
+}
+
+.-translate-y-full {
+  transform: translateY(-100%);
+}
