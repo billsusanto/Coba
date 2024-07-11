@@ -23,9 +23,11 @@ const config: Config = {
       height: {
         'half-screen': '50vh',
         'one-third-screen': '40vh',
+        'two-third-screen': '80vh',
       },
       width: {
         'search-bar': '30vw',
+        'half-screen-width': '50vw',
       },
       boxShadow: {
         'blueShadow': '0 8px 20px 5px rgba(66, 153, 225, 0.5), 0 4px 8px 5px rgba(66, 153, 225, 0.3)',
