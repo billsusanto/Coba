@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Typewriter from 'typewriter-effect';
@@ -8,7 +10,7 @@ const SignUp = () => {
     lastName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
   const [error, setError] = useState('');
@@ -17,7 +19,7 @@ const SignUp = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -48,13 +50,21 @@ const SignUp = () => {
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-md space-y-8">
             <div>
-              <h2 className="mt-6 text-center text-5xl font-semibold text-gray-900">Sign Up</h2>
+              <h2 className="mt-6 text-center text-5xl font-semibold text-gray-900">
+                Sign Up
+              </h2>
             </div>
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <input type="hidden" name="remember" value="true" />
               <div className="rounded-md -space-y-px">
                 <div>
-                  <label htmlFor="first-name" className="" style={{ fontSize: '1.7rem' }}>First Name</label>
+                  <label
+                    htmlFor="first-name"
+                    className=""
+                    style={{ fontSize: '1.7rem' }}
+                  >
+                    First Name
+                  </label>
                   <input
                     id="first-name"
                     name="firstName"
@@ -69,7 +79,13 @@ const SignUp = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="last-name" className="" style={{ fontSize: '1.7rem' }}>Last Name</label>
+                  <label
+                    htmlFor="last-name"
+                    className=""
+                    style={{ fontSize: '1.7rem' }}
+                  >
+                    Last Name
+                  </label>
                   <input
                     id="last-name"
                     name="lastName"
@@ -84,7 +100,13 @@ const SignUp = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email-address" className="" style={{ fontSize: '1.7rem' }}>Email</label>
+                  <label
+                    htmlFor="email-address"
+                    className=""
+                    style={{ fontSize: '1.7rem' }}
+                  >
+                    Email
+                  </label>
                   <input
                     id="email-address"
                     name="email"
@@ -100,7 +122,13 @@ const SignUp = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="" style={{ fontSize: '1.7rem' }}>Password</label>
+                  <label
+                    htmlFor="password"
+                    className=""
+                    style={{ fontSize: '1.7rem' }}
+                  >
+                    Password
+                  </label>
                   <input
                     id="password"
                     name="password"
@@ -114,14 +142,21 @@ const SignUp = () => {
                     onChange={handleChange}
                   />
                   <div className="min-h-6">
-                    {error && formData.password !== formData.confirmPassword && (
-                      <p className="text-red-500 text-sm">{error}</p>
-                    )}
+                    {error &&
+                      formData.password !== formData.confirmPassword && (
+                        <p className="text-red-500 text-sm">{error}</p>
+                      )}
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="confirm-password" className="" style={{ fontSize: '1.7rem' }}>Confirm Password</label>
+                  <label
+                    htmlFor="confirm-password"
+                    className=""
+                    style={{ fontSize: '1.7rem' }}
+                  >
+                    Confirm Password
+                  </label>
                   <input
                     id="confirm-password"
                     name="confirmPassword"
@@ -134,9 +169,10 @@ const SignUp = () => {
                     onChange={handleChange}
                   />
                   <div className="min-h-6">
-                    {error && formData.password !== formData.confirmPassword && (
-                      <p className="text-red-500 text-sm">{error}</p>
-                    )}
+                    {error &&
+                      formData.password !== formData.confirmPassword && (
+                        <p className="text-red-500 text-sm">{error}</p>
+                      )}
                   </div>
                 </div>
               </div>
@@ -157,13 +193,13 @@ const SignUp = () => {
               options={{ loop: true }}
               onInit={(typewriter) => {
                 typewriter
-                  .typeString("Create projects")
+                  .typeString('Create projects')
                   .pauseFor(200)
                   .deleteAll()
-                  .typeString("Connect with others")
+                  .typeString('Connect with others')
                   .pauseFor(200)
                   .deleteAll()
-                  .typeString("Collaborate on ideas")
+                  .typeString('Collaborate on ideas')
                   .pauseFor(200)
                   .deleteAll()
                   .start();
