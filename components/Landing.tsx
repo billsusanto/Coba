@@ -2,16 +2,34 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Typewriter from "typewriter-effect";
-import useScroll from './hooks/useScroll';
 
-import Navbar from './Navbar';
-import StatsComponent from './StatsComponent';
-import Steps from './Steps';
+import Navbar from '../components/Navbar';
+import Stats from '../components/Stats';
+import Steps from '../components/Steps';
 
 const Landing = () => {
     const [hoveredTab, setHoveredTab] = useState<string | null>(null);
     const [fadeIn, setFadeIn] = useState(false);
+    const useScroll = () => {
+        const [scrollPosition, setScrollPosition] = useState(0);
+      
+        const handleScroll = () => {
+          const position = window.pageYOffset;
+          setScrollPosition(position);
+        };
+      
+        useEffect(() => {
+          window.addEventListener('scroll', handleScroll, { passive: true });
+          return () => {
+            window.removeEventListener('scroll', handleScroll);
+          };
+        }, []);
+      
+        return scrollPosition;
+      };
+
     const scrollPosition = useScroll();
+    
 
     const handleMouseEnter = (tab: string) => {
       setHoveredTab(tab);
@@ -138,7 +156,7 @@ const Landing = () => {
                 </div>
             </div>
         </div>
-        <StatsComponent />
+        <Stats />
         <Steps />
     </div>
   );

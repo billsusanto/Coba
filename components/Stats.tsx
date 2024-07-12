@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import CountUp from 'react-countup';
 
-const StatsComponent = () => {
+const Stats = () => {
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -85,4 +85,4 @@ const StatsComponent = () => {
   );
 };
 
-export default StatsComponent;
+export default Stats;
