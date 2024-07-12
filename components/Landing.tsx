@@ -157,6 +157,7 @@ const Landing = () => {
             </div>
         </div>
         <Stats />
+            <div id="projects-section"></div>
         <Steps />
     </div>
   );
