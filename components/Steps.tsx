@@ -86,7 +86,7 @@ const Steps = () => {
     <div className="py-20 relative">
       <div className="container mx-auto">
         <div className="flex items-center justify-between mb-20">
-          <div ref={sectionRef} id="find-projects-section" className={`w-2/5 ${isVisible ? 'fadeInLeft' : ''}`}>
+          <div ref={sectionRef} className={`w-2/5 ${isVisible ? 'fadeInLeft' : ''}`}>
             <div className="flex items-center mb-4">
               <div className="bg-gradient-to-b from-customBlue-default to-customBlue-dark text-white text-2xl font-semibold rounded-full w-14 h-14 flex items-center justify-center mr-4">
                 1

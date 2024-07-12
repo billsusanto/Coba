@@ -22,7 +22,7 @@ const Navbar = () => {
 
   const handleScrollToProjects = (event) => {
     event.preventDefault();
-    const element = document.getElementById('find-projects-section');
+    const element = document.getElementById('projects-section');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -41,7 +41,7 @@ const Navbar = () => {
             <Link href="/home" className="text-gray-700 hover:text-gray-900 text-xl">
               Home
             </Link>
-            <a href="#find-projects-section" onClick={handleScrollToProjects} className="text-gray-700 hover:text-gray-900 text-xl">
+            <a href="#projects-section" onClick={handleScrollToProjects} className="text-gray-700 hover:text-gray-900 text-xl">
               Projects
             </a>
             <Link href="/contact" className="text-gray-700 hover:text-gray-900 text-xl">
