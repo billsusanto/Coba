@@ -20,6 +20,14 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollTop]);
 
+  const handleScrollToProjects = (event) => {
+    event.preventDefault();
+    const element = document.getElementById('find-projects-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className={`bg-transparent fixed top-0 z-50 w-full transition-transform duration-300 ${isScrollingDown ? '-translate-y-full' : 'translate-y-0'}`}>
       <div className="w-100%">
@@ -33,9 +41,9 @@ const Navbar = () => {
             <Link href="/home" className="text-gray-700 hover:text-gray-900 text-xl">
               Home
             </Link>
-            <Link href="/projects" className="text-gray-700 hover:text-gray-900 text-xl">
+            <a href="#find-projects-section" onClick={handleScrollToProjects} className="text-gray-700 hover:text-gray-900 text-xl">
               Projects
-            </Link>
+            </a>
             <Link href="/contact" className="text-gray-700 hover:text-gray-900 text-xl">
               Contact
             </Link>
