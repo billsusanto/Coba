@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -15,17 +17,17 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className='bg-beige-default min-h-screen'>
       <Navbar />
-      <div className="flex flex-col items-center h-one-third-screen bg-gradient-to-b from-white via-indigo-100 to-white">
+      <div className="flex flex-col items-center h-one-third-screen bg-beige-default">
         <header className="text-center mt-20">
-          <h1 className="text-7xl font-semibold text-black mb-5 mt-10">Coba.</h1>
-          <p className="text-5xl text-gray-700 mb-10">Collaborate through projects</p>
+          <h1 className="text-7xl font-semibold text-maroon-default mb-5 mt-10">Coba.</h1>
+          <p className="text-5xl text-maroon-light mb-10">Collaborate through projects</p>
           <div className="flex justify-center mt-10">
             <input 
               type="text" 
               placeholder="Search for projects" 
-              className="w-search-bar h-14 px-6 rounded-full border border-gray-300 shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-search-bar h-14 px-6 rounded-full text-maroon-light bg-gold-light border border-gold-dark shadow-xl focus:outline-none focus:ring-2 focus:ring-maroon-default"
             />
           </div>
         </header>
@@ -46,10 +48,10 @@ const Home = () => {
                         width={35}
                         height={35}
                     />
-                    <p className={`ml-5 font-semibold text-2xl text-black ${hoveredTab === 'Computer Science' ? 'text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-indigo-600' : ''}`}>Computer Science</p>
+                    <p className={`ml-5 font-semibold text-2xl text-maroon-default ${hoveredTab === 'Computer Science' ? 'text-transparent bg-clip-text bg-gradient-to-r from-maroon-default to-maroon-dark' : ''}`}>Computer Science</p>
                 </div>
                 <div className="mt-2 w-full">
-                    <div className={`h-1 ${hoveredTab === 'Computer Science' ? 'bg-gradient-to-r from-customBlue-default to-indigo-600 animate-drawLine' : 'invisible'}`}></div>
+                    <div className={`h-1 ${hoveredTab === 'Computer Science' ? 'bg-gradient-to-r from-maroon-default to-maroon-dark animate-drawLine' : 'invisible'}`}></div>
                 </div>
             </div>
 
@@ -65,10 +67,10 @@ const Home = () => {
                         width={35}
                         height={35}
                     />
-                    <p className={`ml-5 font-semibold text-2xl text-black ${hoveredTab === 'Business' ? 'text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-indigo-600' : ''}`}>Business</p>
+                    <p className={`ml-5 font-semibold text-2xl text-maroon-default ${hoveredTab === 'Business' ? 'text-transparent bg-clip-text bg-gradient-to-r from-maroon-default to-maroon-dark' : ''}`}>Business</p>
                 </div>
                 <div className="mt-2 w-full">
-                    <div className={`h-1 ${hoveredTab === 'Business' ? 'bg-gradient-to-r from-customBlue-default to-indigo-600 animate-drawLine' : 'invisible'}`}></div>
+                    <div className={`h-1 ${hoveredTab === 'Business' ? 'bg-gradient-to-r from-maroon-default to-maroon-dark animate-drawLine' : 'invisible'}`}></div>
                 </div>
             </div>
 
@@ -84,10 +86,10 @@ const Home = () => {
                         width={35}
                         height={35}
                     />
-                    <p className={`ml-5 font-semibold text-2xl text-black ${hoveredTab === 'Arts' ? 'text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-indigo-600' : ''}`}>Arts</p>
+                    <p className={`ml-5 font-semibold text-2xl text-maroon-default ${hoveredTab === 'Arts' ? 'text-transparent bg-clip-text bg-gradient-to-r from-maroon-default to-maroon-dark' : ''}`}>Arts</p>
                 </div>
                 <div className="mt-2 w-full">
-                    <div className={`h-1 ${hoveredTab === 'Arts' ? 'bg-gradient-to-r from-customBlue-default to-indigo-600 animate-drawLine' : 'invisible'}`}></div>
+                    <div className={`h-1 ${hoveredTab === 'Arts' ? 'bg-gradient-to-r from-maroon-default to-maroon-dark animate-drawLine' : 'invisible'}`}></div>
                 </div>
             </div>
 
@@ -103,16 +105,15 @@ const Home = () => {
                         width={35}
                         height={35}
                     />
-                    <p className={`ml-5 font-semibold text-2xl text-black ${hoveredTab === 'Engineering' ? 'text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-indigo-600' : ''}`}>Engineering</p>
+                    <p className={`ml-5 font-semibold text-2xl text-maroon-default ${hoveredTab === 'Engineering' ? 'text-transparent bg-clip-text bg-gradient-to-r from-maroon-default to-maroon-dark' : ''}`}>Engineering</p>
                 </div>
                 <div className="mt-2 w-full">
-                    <div className={`h-1 ${hoveredTab === 'Engineering' ? 'bg-gradient-to-r from-customBlue-default to-indigo-600 animate-drawLine' : 'invisible'}`}></div>
+                    <div className={`h-1 ${hoveredTab === 'Engineering' ? 'bg-gradient-to-r from-maroon-default to-maroon-dark animate-drawLine' : 'invisible'}`}></div>
                 </div>
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {/* Project Card 1 */}
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="bg-white rounded-lg shadow-lg p-5 relative">
               <div className="flex">
                 <Image src="" alt="Project 1" width={100} height={100} className="rounded-md" />
@@ -135,7 +136,7 @@ const Home = () => {
                   <Image src="" alt="Members" width={60} height={20} />
                   <p className="ml-2 text-gray-600">+5</p>
                 </div>
-                <Link href="#" className="bg-gradient-to-r from-blue-400 to-indigo-600 text-white rounded-md px-4 py-2">Collaborate</Link>
+                <Link href="#" className="bg-gradient-to-r from-blue-400 to-maroon-dark text-white rounded-md px-4 py-2">Collaborate</Link>
               </div>
               <div className="absolute top-5 right-5">
                 <button className="focus:outline-none">
@@ -144,7 +145,6 @@ const Home = () => {
               </div>
             </div>
             
-            {/* Project Card 2 */}
             <div className="bg-white rounded-lg shadow-lg p-5 relative">
               <div className="flex">
                 <Image src="" alt="Project 2" width={100} height={100} className="rounded-md" />
@@ -167,7 +167,7 @@ const Home = () => {
                   <Image src="" alt="Members" width={60} height={20} />
                   <p className="ml-2 text-gray-600">+1</p>
                 </div>
-                <Link href="#" className="bg-gradient-to-r from-blue-400 to-indigo-600 text-white rounded-md px-4 py-2">Collaborate</Link>
+                <Link href="#" className="bg-gradient-to-r from-blue-400 to-maroon-dark text-white rounded-md px-4 py-2">Collaborate</Link>
               </div>
               <div className="absolute top-5 right-5">
                 <button className="focus:outline-none">
@@ -175,7 +175,7 @@ const Home = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

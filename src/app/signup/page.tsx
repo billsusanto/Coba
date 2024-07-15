@@ -1,11 +1,11 @@
 'use client'
 
-import Login from "@/components/Login";
+import SignUp from "@/src/components/SignUp";
 
 export default function App() {
   return (
     <main>
-        <Login />
+        <SignUp />
     </main>
   );
 }

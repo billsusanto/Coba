@@ -29,21 +29,25 @@ export async function getAllProjects() {
 export async function createNewProject(prevState: any, formData: FormData) {
   try {
     const title = formData.get('title') as string;
-    const description = formData.get('description') as string;
-    const status = formData.get('status') as string;
+    const author = formData.get('author') as string;
+    const location = formData.get('location') as string;
+    // const description = formData.get('description') as string;
+    // const status = formData.get('status') as string;
     // const team = JSON.parse(formData.get('team') as string) as User[];
     const openPositions = (formData.get('openPositions') as string).split(',');
-    const startDate = new Date(formData.get('startDate') as string);
-    const endDate = new Date(formData.get('endDate') as string);
+    // const startDate = new Date(formData.get('startDate') as string);
+    // const endDate = new Date(formData.get('endDate') as string);
 
     const projectData = {
         title,
-        description,
+        author,
+        location,
+        // description,
         // team,
         openPositions,
-        status,
-        startDate,
-        endDate,
+        // status,
+        // startDate,
+        // endDate,
     };
     const projectsRef = collection(db, 'projects');
     const docRef = await addDoc(projectsRef, projectData);

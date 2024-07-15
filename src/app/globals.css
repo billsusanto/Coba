@@ -57,15 +57,11 @@
   animation: fadeInRight 2s forwards;
 }
 
-.overflow-x-scroll {
-  overflow-x: auto;
+.no-scrollbar {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
 
-.overflow-x-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.overflow-x-scroll {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
 }
