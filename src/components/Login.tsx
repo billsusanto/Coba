@@ -92,6 +92,14 @@ const Login = () => {
             }}
           />
         </h1>
+        <button
+          type="button"
+          className="group relative w-full flex justify-center py-3 px-4 text-lg font-medium rounded-md text-gray-700 bg-white border border-gray-300 hover:bg-gray-50"
+          onClick={() => signIn('google', { callbackUrl: '/my-projects' })}
+        >
+          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" className="w-6 h-6 mr-2" />
+          Sign in with Google
+        </button>
       </div>
     </div>
     </div>

@@ -1,6 +1,6 @@
 'use client'
 
-import Landing from "@/src/components/Landing";
+import Landing from "../components/Landing";
 
 export default function App() {
   return (

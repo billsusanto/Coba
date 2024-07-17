@@ -7,5 +7,6 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ['/my-projects/:path*'],
+  matcher: ['/create-project/:path*'],
+// matcher: ['/signup/:path*'],
 };
