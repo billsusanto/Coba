@@ -3,9 +3,10 @@ import ProjectCard from "./ProjectCard";
 
 interface ProjectsListProps {
   projects: Project[];
+  showCreateProjectCard?: boolean;
 }
 
-const ProjectsList: React.FC<ProjectsListProps> = ({ projects }) => {
+const ProjectsList: React.FC<ProjectsListProps> = ({ projects, showCreateProjectCard = true }) => {
   return (
     <ul className="flex list-none">
       {projects && projects.length > 0 ? (
@@ -17,9 +18,11 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ projects }) => {
           ))}
         </>
       ) : null}
-      <li className="mb-4 pr-10">
-        <ProjectCard createProject />
-      </li>
+      {showCreateProjectCard && (
+        <li className="mb-4 pr-10">
+          <ProjectCard createProject />
+        </li>
+      )}
     </ul>
   );
 };

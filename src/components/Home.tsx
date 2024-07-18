@@ -42,7 +42,7 @@ const Home = () => {
       <div className="flex flex-col items-center h-one-third-screen bg-beige-default">
         <header className="text-center mt-20">
           <h1 className="text-7xl font-semibold text-maroon-default mb-5 mt-10">Coba.</h1>
-          <p className="text-5xl text-maroon-light mb-10">Collaborate through projects</p>
+          <p className="text-5xl text-maroon-light">Collaborate through projects</p>
           <div className="flex justify-center mt-10">
             <input 
               type="text" 
@@ -53,7 +53,7 @@ const Home = () => {
         </header>
       </div>
 
-      <section className="w-full mt-20">
+      <section className="w-full">
         <div className="container mx-auto">
           <div className="flex justify-around text-gray-600 mb-20">
             <div className="flex flex-col items-center">
@@ -139,7 +139,7 @@ const Home = () => {
             ) : error ? (
               <p>{error}</p>
             ) : (
-              <ProjectsList projects={projects} />
+              <ProjectsList projects={projects} showCreateProjectCard={false} />
             )}
           </div>
         </div>
