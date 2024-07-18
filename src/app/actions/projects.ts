@@ -7,6 +7,8 @@ import {
   deleteDoc,
   collection,
   getDocs,
+  query,
+  where,
 } from 'firebase/firestore';
 import { revalidatePath } from 'next/cache';
 
@@ -26,29 +28,39 @@ export async function getAllProjects() {
   }
 }
 
-export async function createNewProject(prevState: any, formData: FormData) {
+export async function getAllProjectsByEmail(email: string) {
+  try {
+    const projectsRef = collection(db, 'projects');
+    const q = query(projectsRef, where('email', '==', email));
+    const snapshot = await getDocs(q);
+    const projects = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Project[];
+
+    return { ok: true, projects: projects };
+  } catch (error) {
+    console.error('projects/getAllProjectsByEmail:', error);
+    return { ok: false, projects: [] };
+  }
+}
+
+
+export async function createNewProject(user: { name: string; email: string }, formData: FormData) {
   try {
     const title = formData.get('title') as string;
-    const author = formData.get('author') as string;
     const location = formData.get('location') as string;
-    // const description = formData.get('description') as string;
-    // const status = formData.get('status') as string;
-    // const team = JSON.parse(formData.get('team') as string) as User[];
-    const openPositions = (formData.get('openPositions') as string).split(',');
-    // const startDate = new Date(formData.get('startDate') as string);
-    // const endDate = new Date(formData.get('endDate') as string);
+    const openPositions = formData.getAll('openPositions') as string[];
+    const author = user.name ? user.name.split(' ')[0] : user.email.split('@')[0];
 
     const projectData = {
         title,
         author,
         location,
-        // description,
-        // team,
         openPositions,
-        // status,
-        // startDate,
-        // endDate,
+        email: user.email,
     };
+
     const projectsRef = collection(db, 'projects');
     const docRef = await addDoc(projectsRef, projectData);
 
@@ -68,7 +80,7 @@ export async function deleteProject(projectId: string) {
     const projectRef = doc(db, 'projects', projectId);
     await deleteDoc(projectRef);
 
-    revalidatePath('/projects');
+    revalidatePath('/my-projects');
     return { ok: true };
   } catch (error) {
     console.error('projects/deleteProject:', error);

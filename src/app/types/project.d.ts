@@ -7,7 +7,7 @@ type Project = {
     location: string;
     // description: string;
     // team: User[]; // User[0] => Author which has Name, Major, School
-    // openPositions: string[];
+    openPositions: string[];
     status: string;
     // startDate: Date;
     // endDate: Date;

@@ -1,36 +1,10 @@
-import React, { useState } from 'react';
+'use client';
+import React from 'react';
 import Link from 'next/link';
-import Typewriter from 'typewriter-effect';
+import Typewriter from "typewriter-effect";
+import { signIn } from 'next-auth/react';
 
 const SignUp = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
-
-  const [error, setError] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-    // Handle form submission logic here
-    console.log('Form submitted:', formData);
-  };
-
   return (
     <div className='bg-beige-default'>
       <nav className="bg-transparent fixed top-0 z-50 w-full">
@@ -48,107 +22,32 @@ const SignUp = () => {
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-md space-y-8">
             <div>
-              <h2 className="mt-6 text-center text-5xl font-semibold text-maroon-default">Sign Up</h2>
+              <h2 className="mt-6 text-center text-5xl font-semibold text-maroon-default">Create Account</h2>
             </div>
-            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-              <input type="hidden" name="remember" value="true" />
-              <div className="rounded-md -space-y-px">
-                <div>
-                  <label htmlFor="first-name" className="text-maroon-dark" style={{ fontSize: '1.7rem' }}>First Name</label>
-                  <input
-                    id="first-name"
-                    name="firstName"
-                    type="text"
-                    required
-                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gold-dark placeholder-maroon-light text-maroon-default focus:outline-none focus:ring-maroon-default focus:border-maroon-default focus:z-10 mt-2 mb-5 bg-gold-light"
-                    style={{ fontSize: '1.2rem' }}
-                    placeholder="Enter your first name"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="last-name" className="text-maroon-dark" style={{ fontSize: '1.7rem' }}>Last Name</label>
-                  <input
-                    id="last-name"
-                    name="lastName"
-                    type="text"
-                    required
-                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gold-dark placeholder-maroon-light text-maroon-default focus:outline-none focus:ring-maroon-default focus:border-maroon-default focus:z-10 mt-2 mb-5 bg-gold-light"
-                    style={{ fontSize: '1.2rem' }}
-                    placeholder="Enter your last name"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email-address" className="text-maroon-dark" style={{ fontSize: '1.7rem' }}>Email</label>
-                  <input
-                    id="email-address"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gold-dark placeholder-maroon-light text-maroon-default focus:outline-none focus:ring-maroon-default focus:border-maroon-default focus:z-10 mt-2 mb-5 bg-gold-light"
-                    style={{ fontSize: '1.2rem' }}
-                    placeholder="Enter your email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="password" className="text-maroon-dark" style={{ fontSize: '1.7rem' }}>Password</label>
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gold-dark placeholder-maroon-light text-maroon-default focus:outline-none focus:ring-maroon-default focus:border-maroon-default focus:z-10 mt-2 bg-gold-light"
-                    style={{ fontSize: '1.2rem' }}
-                    placeholder="Enter your password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                  <div className="min-h-6">
-                    {error && formData.password !== formData.confirmPassword && (
-                      <p className="text-red-500 text-sm">{error}</p>
-                    )}
-                  </div>
-                </div>
- 
-                <div>
-                  <label htmlFor="confirm-password" className="text-maroon-dark" style={{ fontSize: '1.7rem' }}>Confirm Password</label>
-                  <input
-                    id="confirm-password"
-                    name="confirmPassword"
-                    type="password"
-                    required
-                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gold-dark placeholder-maroon-light text-maroon-default focus:outline-none focus:ring-maroon-default focus:border-maroon-default focus:z-10 mt-2 bg-gold-light"
-                    style={{ fontSize: '1.2rem' }}
-                    placeholder="Confirm your password"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                  />
-                  <div className="min-h-6">
-                    {error && formData.password !== formData.confirmPassword && (
-                      <p className="text-red-500 text-sm">{error}</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="group relative w-full flex justify-center py-3 px-4 text-lg font-medium rounded-md text-white bg-gradient-to-r from-maroon-light via-maroon-default to-maroon-dark"
-                >
-                  Sign Up
-                </button>
-              </div>
-            </form>
+            <button
+              type="button"
+              className="group relative w-full flex justify-center py-3 px-4 text-lg font-medium rounded-md text-white bg-gradient-to-r from-maroon-light via-maroon-default to-maroon-dark"
+              onClick={() => signIn('google', { callbackUrl: '/my-projects' })}
+            >
+              {/* <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" className="w-6 h-6 mr-2" /> */}
+              Sign up with Google
+            </button>
+            <button
+              type="button"
+              className="group relative w-full flex justify-center py-3 px-4 text-lg font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700"
+              onClick={() => signIn('github', { callbackUrl: '/my-projects' })}
+            >
+              {/* <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fillRule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clipRule="evenodd" />
+              </svg> */}
+              Sign up with GitHub
+            </button>
+            <div className="text-center text-lg">
+              <span>Already have an account? </span>
+              <Link href="/login" className="text-green-600">
+                Login
+              </Link>
+            </div>
           </div>
         </div>
         <div className="flex-1 flex items-center relative">

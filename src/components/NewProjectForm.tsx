@@ -1,13 +1,34 @@
 'use client';
-import { useFormState } from 'react-dom';
-import { createNewProject } from '@/src/app/actions/projects';
+import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { createNewProject } from '../app/actions/projects';
 
 export default function NewProjectForm() {
-  const [state, action] = useFormState(createNewProject, null);
+  const { data: session } = useSession();
+  const [formState, setFormState] = useState({ ok: true, message: '' });
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!session || !session.user) {
+      setFormState({ ok: false, message: 'User session is not available.' });
+      return;
+    }
+    const formData = new FormData(event.target);
+    const user = {
+      name: session.user.name || '',
+      email: session.user.email || '',
+    };
+    try {
+      await createNewProject(user, formData);
+      setFormState({ ok: true, message: 'Project created successfully!' });
+    } catch (error) {
+      setFormState({ ok: false, message: error.message });
+    }
+  };
 
   return (
     <form
-      action={action}
+      onSubmit={handleSubmit}
       className="flex flex-col gap-4 w-one-third-width mx-auto border border-gold-dark rounded-3xl bg-gold-light text-2xl p-10"
     >
       <div className="flex flex-col">
@@ -22,7 +43,7 @@ export default function NewProjectForm() {
           className="p-2 border-2 border-gold-default rounded-3xl"
         />
       </div>
-      <div className="flex flex-col">
+      {/* <div className="flex flex-col">
         <label htmlFor="author" className="mb-2 font-bold">
           Author:
         </label>
@@ -32,7 +53,7 @@ export default function NewProjectForm() {
           name="author"
           className="p-2 border-2 border-gold-default rounded-3xl"
         />
-      </div>
+      </div> */}
       <div className="flex flex-col">
         <label htmlFor="location" className="mb-2 font-bold">
           Location:
@@ -44,35 +65,24 @@ export default function NewProjectForm() {
           className="p-2 border-2 border-gold-default rounded-3xl"
         />
       </div>
-      {/* <div className="flex flex-col">
-        <label htmlFor="status" className="mb-2 font-bold">
-          Status:
-        </label>
-        <select
-          id="status"
-          name="status"
-          required
-          className="p-2 border-2 border-gold-default rounded-3xl"
-        >
-          <option value="planning">Planning</option>
-          <option value="in-progress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
-      </div> */}
       <div className="flex flex-col">
         <label htmlFor="openPositions" className="mb-2 font-bold">
           Open Positions:
         </label>
-        <select
-          id="openPositions"
-          name="openPositions"
-          required
-          className="p-2 border-2 border-gold-default rounded-3xl"
-        >
-          <option value="front-end">Front End</option>
-          <option value="back-end">Back End</option>
-          <option value="design">Design</option>
-        </select>
+        <div className="p-2 border-2 border-gold-default rounded-3xl">
+          <div className="flex items-center mb-2">
+            <input type="checkbox" id="front-end" name="openPositions" value="front-end" className="mr-2" />
+            <label htmlFor="front-end" className="text-lg">Front End</label>
+          </div>
+          <div className="flex items-center mb-2">
+            <input type="checkbox" id="back-end" name="openPositions" value="back-end" className="mr-2" />
+            <label htmlFor="back-end" className="text-lg">Back End</label>
+          </div>
+          <div className="flex items-center mb-2">
+            <input type="checkbox" id="design" name="openPositions" value="design" className="mr-2" />
+            <label htmlFor="design" className="text-lg">Design</label>
+          </div>
+        </div>
       </div>
 
       <button
@@ -81,7 +91,7 @@ export default function NewProjectForm() {
       >
           Add Project
       </button>
-      {state && !state.ok && <p className="text-red-500">{state.message}</p>}
+      {formState && !formState.ok && <p className="text-red-500">{formState.message}</p>}
     </form>
   );
 }

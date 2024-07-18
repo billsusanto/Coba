@@ -1,3 +1,4 @@
+'use client';
 import { deleteProject } from "@/src/app/actions/projects";
 import { SquarePlus } from 'lucide-react';
 import Image from 'next/image';
