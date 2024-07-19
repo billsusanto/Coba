@@ -46,18 +46,25 @@ export async function getAllProjectsByEmail(email: string) {
 }
 
 
+
 export async function createNewProject(user: { name: string; email: string }, formData: FormData) {
   try {
     const title = formData.get('title') as string;
-    const location = formData.get('location') as string;
-    const openPositions = formData.getAll('openPositions') as string[];
     const author = user.name ? user.name.split(' ')[0] : user.email.split('@')[0];
+    const location = formData.get('location') as string;
+    const description = formData.get('description') as string;
+    const masterplan = formData.get('masterplan') as string;
+    const interests = formData.getAll('interests') as string[];
+    const openRoles = formData.getAll('openRoles') as string[];
 
     const projectData = {
         title,
         author,
         location,
-        openPositions,
+        description,
+        masterplan,
+        interests,
+        openRoles,
         email: user.email,
     };
 

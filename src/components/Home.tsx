@@ -37,25 +37,25 @@ const Home = () => {
   };
 
   return (
-    <div className='bg-beige-default min-h-screen'>
+    <div className='bg-white min-h-screen'>
       <Navbar />
-      <div className="flex flex-col items-center h-one-third-screen bg-beige-default">
+      {/* <div className="flex flex-col items-center h-one-third-screen bg-white">
         <header className="text-center mt-20">
-          <h1 className="text-7xl font-semibold text-maroon-default mb-5 mt-10">Coba.</h1>
-          <p className="text-5xl text-maroon-light">Collaborate through projects</p>
+          <h1 className="text-7xl font-semibold text-black mb-5 mt-10">Coba.</h1>
+          <p className="text-5xl text-gray-600">Collaborate through projects</p>
           <div className="flex justify-center mt-10">
             <input 
               type="text" 
               placeholder="Search for projects" 
-              className="w-search-bar h-14 px-6 rounded-full text-maroon-light bg-gold-light border border-gold-dark shadow-xl focus:outline-none focus:ring-2 focus:ring-maroon-default"
+              className="w-search-bar h-14 px-6 rounded-full text-black bg-gray-100 border border-customBlue-default shadow-xl focus:outline-none focus:ring-2 focus:ring-customBlue-default"
             />
           </div>
         </header>
-      </div>
+      </div> */}
 
       <section className="w-full">
         <div className="container mx-auto">
-          <div className="flex justify-around text-gray-600 mb-20">
+          {/*<div className="flex justify-around text-gray-600 mb-20">
             <div className="flex flex-col items-center">
               <div 
                 className="flex items-center"
@@ -68,10 +68,10 @@ const Home = () => {
                   width={35}
                   height={35}
                 />
-                <p className={`ml-5 font-semibold text-2xl text-maroon-default ${hoveredTab === 'Computer Science' ? 'text-transparent bg-clip-text bg-gradient-to-r from-maroon-default to-maroon-dark' : ''}`}>Computer Science</p>
+                <p className={`ml-5 font-semibold text-2xl ${hoveredTab === 'Computer Science' ? 'text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark' : ''}`}>Computer Science</p>
               </div>
               <div className="mt-2 w-full">
-                <div className={`h-1 ${hoveredTab === 'Computer Science' ? 'bg-gradient-to-r from-maroon-default to-maroon-dark animate-drawLine' : 'invisible'}`}></div>
+                <div className={`h-1 ${hoveredTab === 'Computer Science' ? 'bg-gradient-to-r from-customBlue-default to-customBlue-dark animate-drawLine' : 'invisible'}`}></div>
               </div>
             </div>
 
@@ -87,10 +87,10 @@ const Home = () => {
                   width={35}
                   height={35}
                 />
-                <p className={`ml-5 font-semibold text-2xl text-maroon-default ${hoveredTab === 'Business' ? 'text-transparent bg-clip-text bg-gradient-to-r from-maroon-default to-maroon-dark' : ''}`}>Business</p>
+                <p className={`ml-5 font-semibold text-2xl ${hoveredTab === 'Business' ? 'text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark' : ''}`}>Business</p>
               </div>
               <div className="mt-2 w-full">
-                <div className={`h-1 ${hoveredTab === 'Business' ? 'bg-gradient-to-r from-maroon-default to-maroon-dark animate-drawLine' : 'invisible'}`}></div>
+                <div className={`h-1 ${hoveredTab === 'Business' ? 'bg-gradient-to-r from-customBlue-default to-customBlue-dark animate-drawLine' : 'invisible'}`}></div>
               </div>
             </div>
 
@@ -106,10 +106,10 @@ const Home = () => {
                   width={35}
                   height={35}
                 />
-                <p className={`ml-5 font-semibold text-2xl text-maroon-default ${hoveredTab === 'Arts' ? 'text-transparent bg-clip-text bg-gradient-to-r from-maroon-default to-maroon-dark' : ''}`}>Arts</p>
+                <p className={`ml-5 font-semibold text-2xl ${hoveredTab === 'Arts' ? 'text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark' : ''}`}>Arts</p>
               </div>
               <div className="mt-2 w-full">
-                <div className={`h-1 ${hoveredTab === 'Arts' ? 'bg-gradient-to-r from-maroon-default to-maroon-dark animate-drawLine' : 'invisible'}`}></div>
+                <div className={`h-1 ${hoveredTab === 'Arts' ? 'bg-gradient-to-r from-customBlue-default to-customBlue-dark animate-drawLine' : 'invisible'}`}></div>
               </div>
             </div>
 
@@ -125,13 +125,13 @@ const Home = () => {
                   width={35}
                   height={35}
                 />
-                <p className={`ml-5 font-semibold text-2xl text-maroon-default ${hoveredTab === 'Engineering' ? 'text-transparent bg-clip-text bg-gradient-to-r from-maroon-default to-maroon-dark' : ''}`}>Engineering</p>
+                <p className={`ml-5 font-semibold text-2xl ${hoveredTab === 'Engineering' ? 'text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark' : ''}`}>Engineering</p>
               </div>
               <div className="mt-2 w-full">
-                <div className={`h-1 ${hoveredTab === 'Engineering' ? 'bg-gradient-to-r from-maroon-default to-maroon-dark animate-drawLine' : 'invisible'}`}></div>
+                <div className={`h-1 ${hoveredTab === 'Engineering' ? 'bg-gradient-to-r from-customBlue-default to-customBlue-dark animate-drawLine' : 'invisible'}`}></div>
               </div>
             </div>
-          </div>
+          </div> */}
           
           <div className="flex no-scrollbar overflow-x-auto -mx-2 pb-10 w-full">
             {loading ? (
@@ -139,7 +139,7 @@ const Home = () => {
             ) : error ? (
               <p>{error}</p>
             ) : (
-              <ProjectsList projects={projects} showCreateProjectCard={false} />
+              <ProjectsList projects={projects} showCreateProjectCard={false} enableDelete={false}/>
             )}
           </div>
         </div>

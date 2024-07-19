@@ -6,12 +6,12 @@ import { signIn } from 'next-auth/react';
 
 const Login = () => {
   return (
-    <div className='bg-beige-default'>
+    <div className='bg-white'>
       <nav className="bg-transparent fixed top-0 z-50 w-full">
         <div className="w-100%">
           <div className="flex justify-between h-16">
             <div className="flex items-center sm:px-5 sm:pr-20">
-              <Link href="/" className="text-3xl text-maroon-default pl-10">
+              <Link href="/" className="text-3xl text-gray-600 pl-10">
                 Coba.
               </Link>
             </div>
@@ -22,11 +22,11 @@ const Login = () => {
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-md space-y-8">
             <div>
-              <h2 className="mt-6 text-center text-5xl font-semibold text-maroon-default">Welcome Back</h2>
+              <h2 className="mt-6 text-center text-5xl font-semibold text-black">Welcome Back</h2>
             </div>
             <button
               type="button"
-              className="group relative w-full flex justify-center py-3 px-4 text-lg font-medium rounded-md text-white bg-gradient-to-r from-maroon-light via-maroon-default to-maroon-dark"
+              className="group relative w-full flex justify-center py-3 px-4 text-lg font-medium rounded-md text-white bg-gradient-to-r from-customBlue-light via-customBlue-default to-customBlue-dark"
               onClick={() => signIn('google', { callbackUrl: '/my-projects' })}
             >
               {/* <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" className="w-6 h-6 mr-2" /> */}
@@ -51,7 +51,7 @@ const Login = () => {
           </div>
         </div>
         <div className="flex-1 flex items-center relative">
-          <h1 className="text-6xl font-semibold text-maroon-default absolute left-1/4">
+          <h1 className="text-6xl font-semibold text-black absolute left-1/4">
             <Typewriter
               options={{ loop: true, cursor: '' }}
               onInit={(typewriter) => {

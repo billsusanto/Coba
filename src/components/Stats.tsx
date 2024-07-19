@@ -30,7 +30,7 @@ const Stats = () => {
   }, []);
 
   return (
-    <div ref={ref} className="relative flex justify-around py-8 bg-beige-default rounded-lg overflow-hidden">
+    <div ref={ref} className="relative flex justify-around py-8 bg-white rounded-lg overflow-hidden">
       <div
         style={{
           content: '""',
@@ -39,7 +39,7 @@ const Stats = () => {
           left: 0,
           width: '100%',
           height: '2px',
-          background: 'linear-gradient(to right, #BC4B51, #7F0606)',
+          background: 'linear-gradient(to right, #60a5fa, #4f46e5)',
         }}
       />
       <div
@@ -50,36 +50,36 @@ const Stats = () => {
           left: 0,
           width: '100%',
           height: '2px',
-          background: 'linear-gradient(to right, #BC4B51, #7F0606)',
+          background: 'linear-gradient(to right, #60a5fa, #4f46e5)',
         }}
       />
-      <div className="flex justify-around py-8 w-full bg-beige-default">
+      <div className="flex justify-around py-8 w-full bg-white">
         <div className="text-center">
           <div className="flex items-start justify-start pb-2">
-            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-maroon-default to-maroon-dark ml-4 mr-2">
+            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark ml-4 mr-2">
               {inView && <CountUp start={0} end={23} duration={3} />}
             </div>
             <Image src="/universities.png" alt="Universities" width={40} height={40} />
           </div>
-          <div className="text-2xl text-maroon-light">Universities</div>
+          <div className="text-2xl text-black">Universities</div>
         </div>
         <div className="text-center">
           <div className="flex items-start justify-start pb-2">
-            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-maroon-default to-maroon-dark mr-2">
+            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark mr-2">
               {inView && <CountUp start={0} end={200} duration={3} />}+
             </div>
             <Image src="/students.png" alt="Students" width={40} height={40} />
           </div>
-          <div className="text-2xl text-maroon-light">Students</div>
+          <div className="text-2xl text-black">Students</div>
         </div>
         <div className="text-center">
           <div className="flex items-start justify-start pb-2">
-            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-maroon-default to-maroon-dark ml-2 mr-4">
+            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark ml-2 mr-4">
               {inView && <CountUp start={0} end={430} duration={3} />}
             </div>
             <Image src="/projects.png" alt="Active Projects" width={40} height={40} />
           </div>
-          <div className="text-2xl text-maroon-light">Active Projects</div>
+          <div className="text-2xl text-black">Active Projects</div>
         </div>
       </div>
     </div>

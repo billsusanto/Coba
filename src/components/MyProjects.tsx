@@ -40,15 +40,15 @@ export default function MyProjects() {
   }
 
   return (
-    <div className="bg-beige-default w-full min-h-screen">
+    <div className="bg-white w-full min-h-screen">
       <Navbar />
       <div className="w-full mx-9" style={{ paddingLeft: '1.5rem', paddingTop: '1.5rem' }}>
         <div className="pt-20 pb-10">
-          <h1 className="t-2 text-5xl text-maroon-default">My Projects</h1>
+          <h1 className="t-2 text-5xl text-black">My Projects</h1>
         </div>
 
         <div className="flex no-scrollbar overflow-x-auto -mx-2 pb-10 w-full">
-          <ProjectsList projects={projects} />
+          <ProjectsList projects={projects} enableDelete={true}/>
         </div>
       </div>
     </div>

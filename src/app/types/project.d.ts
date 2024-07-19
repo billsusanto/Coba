@@ -5,17 +5,10 @@ type Project = {
     title: string;
     author: string;
     location: string;
-    // description: string;
-    // team: User[]; // User[0] => Author which has Name, Major, School
-    openPositions: string[];
-    status: string;
-    // startDate: Date;
-    // endDate: Date;
-  };
-// type Project = {
-//     id: string;
-//     title: string;
-//     subheading: string;
-//     description: string;
-//     status: string;
-//   };
+    description: string;
+    masterplan: string;
+    interests: string[];
+    openRoles: string[];
+    startDate: Date;
+    endDate: Date;
+};
