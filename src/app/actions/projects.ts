@@ -71,7 +71,7 @@ export async function createNewProject(user: { name: string; email: string }, fo
     const projectsRef = collection(db, 'projects');
     const docRef = await addDoc(projectsRef, projectData);
 
-    revalidatePath('/projects');
+    revalidatePath('/my-projects');
     return { ok: true, id: docRef.id };
   } catch (error) {
     console.error('projects/addNewProject:', error);
