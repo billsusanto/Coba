@@ -1,8 +1,11 @@
 export type User = {
-    id: string;
+    email: string;
     name: string;
     major: string;
     school: string;
-    email: string;
+    bio: string;
+    technologies: string[];
+    socials: string[];
+    profilePicture: string;
   };
   

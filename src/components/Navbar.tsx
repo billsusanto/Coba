@@ -52,7 +52,7 @@ const Navbar = () => {
             {/* <a href="#projects-section" onClick={handleScrollToProjects} className="text-gray-600 hover:text-black text-xl">
               Projects
             </a> */}
-            <Link href="/my-projects" className="text-gray-600 hover:text-black text-xl">
+            <Link href="/projects" className="text-gray-600 hover:text-black text-xl">
               Projects
             </Link>
             <Link href="/contact" className="text-gray-600 hover:text-black text-xl">

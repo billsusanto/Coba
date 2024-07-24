@@ -1,5 +1,5 @@
-import MyProjects from "@/src/components/MyProjects";
+// import MyProjects from "@/src/components/MyProjects";
 
-export default function App() {
-  return <MyProjects />;
-}
+// export default function App() {
+//   return <MyProjects />;
+// }

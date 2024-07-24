@@ -1,11 +1,11 @@
 'use client'
 
-import Home from "@/src/components/Home";
+import Projects from "@/src/components/Projects";
 
 export default function App() {
   return (
     <main>
-      <Home />
+      <Projects />
     </main>
   );
 }

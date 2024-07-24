@@ -1,10 +1,10 @@
-import Navbar from '@/src/components/Navbar';
+import Sidebar from '@/src/components/Sidebar';
 import NewProjectForm from '@/src/components/NewProjectForm';
 
 export default async function CreateProjects() {
   return (
     <div className='bg-white w-full min-h-screen'>
-      <Navbar />
+      <Sidebar />
       <div className="container mx-auto" style={{ paddingTop: '1.5rem' }}>
         <div className="pt-20 pb-10 text-center">
           

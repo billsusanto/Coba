@@ -42,6 +42,7 @@ export default function NewProjectForm() {
     const formData = new FormData(event.target as HTMLFormElement);
     formData.append('interests', selectedInterests.join(', '));
     formData.append('openRoles', selectedRoles.join(', '));
+    formData.append('location', location);
     const user = {
       name: session.user.name || '',
       email: session.user.email || '',
@@ -283,7 +284,7 @@ export default function NewProjectForm() {
 
       <button
           type="submit"
-          className="p-3 border-none rounded-2xl bg-gradient-to-r from-customBlue-light via-customBlue-default to-customBlue-dark text-white cursor-pointer w-full"
+          className="p-3 border-none rounded-2xl bg-gray-800 text-white cursor-pointer w-full"
       >
           Add Project
       </button>
