@@ -8,7 +8,7 @@ import ProjectsList from '@/src/components/ProjectList';
 import ProfilePage from '@/src/components/ProfilePage';
 import Link from 'next/link';
 
-const Projects = () => {
+const MyProfile = () => {
   const { data: session } = useSession();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -65,6 +65,7 @@ const Projects = () => {
                     projects={projects}
                     showCreateProjectCard={true}
                     enableDelete={true}
+                    onProjectClick={false as any}
                   />
                 )}
               </div>
@@ -77,4 +78,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default MyProfile;

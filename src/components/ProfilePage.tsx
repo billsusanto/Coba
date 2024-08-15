@@ -68,7 +68,7 @@ const ProfilePage = () => {
   return (
     <div className="flex bg-gray-300 min-h-screen w-profilePage pt-5">
       <div className="flex-1">
-        <div className="bg-white p-10 rounded-lg shadow-md border border-black w-full">
+        <div className="bg-white p-10 rounded-lg shadow-md w-full">
           <div className="flex items-center">
             <img
               src="default-avatar.png"

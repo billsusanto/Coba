@@ -18,7 +18,7 @@ const config: Config = {
         gray: {
           'sidebar': '#1E1E1E',
           'sidebar-hover': '#434343',
-        }
+        },
       },
       height: {
         'half-screen': '50vh',

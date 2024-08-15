@@ -1,4 +1,3 @@
-// ProjectCard.tsx
 import React from 'react';
 import { deleteProject } from "@/src/app/actions/projects";
 import { SquarePlus } from 'lucide-react';
@@ -32,7 +31,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, createProject = fals
   const interestsList = interests.join(', ');
 
   return (
-    <div className="border border-black bg-white shadow-lg rounded-xl flex flex-col justify-between hover:border-blue-500 hover:scale-105 transform transition-transform duration-300 ease-in-out" style={{ width: '20vw', height: 'auto' }}>
+    <div className="bg-white shadow-lg rounded-xl flex flex-col justify-between hover:border hover:border-blue-500 hover:scale-105 transform transition-transform duration-300 ease-in-out" style={{ width: '20vw', height: 'auto' }}>
       <div className="pl-10 pt-10 pr-10 flex-grow">
         <div className="font-bold text-3xl">
           {project.title} 

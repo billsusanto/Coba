@@ -11,4 +11,5 @@ type Project = {
     openRoles: string[];
     startDate: Date;
     endDate: Date;
+    collaborate_requests: string[];
 };

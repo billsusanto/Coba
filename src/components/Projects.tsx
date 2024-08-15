@@ -40,7 +40,7 @@ const Projects = () => {
     <div className="flex max-w-screen min-h-screen bg-gray-300 overflow-hidden">
       <Sidebar />
       <div className="flex-1 flex flex-col pt-5 pr-24">
-        <div className="flex justify-between items-center pl-64">
+        <div className="flex justify-between items-center pb-5 pl-64">
           <div className="flex items-center w-2/5 rounded-full p-10">
             <input
               type="text"

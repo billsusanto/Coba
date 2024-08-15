@@ -136,8 +136,9 @@ export default function NewProjectForm() {
           type="text"
           id="title"
           name="title"
+          placeholder='Project Title'
           required
-          className="p-2 border-2 border-gray-200 rounded-2xl"
+          className="p-3 border-2 border-gray-200 rounded-2xl"
         />
       </div>
       <div className="flex flex-col">
@@ -153,7 +154,8 @@ export default function NewProjectForm() {
           inputProps={{
             value: location,
             onChange: onLocationChange,
-            className: 'p-2 border-2 border-gray-100 rounded-2xl w-full',
+            className: 'p-3 border-2 border-gray-100 rounded-2xl w-full',
+            placeholder: 'City, State, Country',
             onKeyDown: (e: KeyboardEvent) => {
               if (e.key === 'Enter' && location) {
                 setLocation(location);
@@ -177,7 +179,8 @@ export default function NewProjectForm() {
         <textarea
           id="description"
           name="description"
-          className="p-2 border-2 border-gray-200 rounded-2xl"
+          placeholder='Short Description'
+          className="p-3 border-2 border-gray-200 rounded-2xl"
         />
       </div>
       <div className="flex flex-col">
@@ -187,6 +190,7 @@ export default function NewProjectForm() {
         <textarea
           id="masterplan"
           name="masterplan"
+          placeholder='Hidden Description'
           className="p-2 border-2 border-gray-200 rounded-2xl"
         />
       </div>
@@ -204,6 +208,7 @@ export default function NewProjectForm() {
             value: interest,
             onChange: onChange,
             className: 'p-2 border-2 border-gray-100 rounded-2xl w-full',
+            placeholder: 'Interest Tags',
             onKeyDown: (e: KeyboardEvent) => {
               if (e.key === 'Enter' && interest && !selectedInterests.includes(interest)) {
                 setSelectedInterests([...selectedInterests, interest]);
@@ -250,6 +255,7 @@ export default function NewProjectForm() {
             value: role,
             onChange: onRoleChange,
             className: 'p-2 border-2 border-gray-100 rounded-2xl w-full',
+            placeholder: 'Open Roles',
             onKeyDown: (e: KeyboardEvent) => {
               if (e.key === 'Enter' && role && !selectedRoles.includes(role)) {
                 setSelectedRoles([...selectedRoles, role]);
