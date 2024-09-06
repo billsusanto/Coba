@@ -1,13 +1,14 @@
 'use client';
+
 import React from 'react';
-import ProjectCard from "./ProjectCard";
+import ProjectCard from './ProjectCard';
 import { Project } from '../app/types/project';
 
 interface ProjectsListProps {
   projects: Project[];
   showCreateProjectCard?: boolean;
   enableDelete?: boolean;
-  onProjectClick?: (project: Project) => void | false;
+  onProjectClick: (project: Project) => void;
 }
 
 const ProjectsList: React.FC<ProjectsListProps> = ({ projects, showCreateProjectCard = true, enableDelete = true, onProjectClick }) => {
@@ -16,12 +17,14 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ projects, showCreateProject
       {projects && projects.length > 0 ? (
         <>
           {projects.map((project) => (
-            <li key={project.id} className="mb-4 pr-10 pl-5" onClick={() => onProjectClick(project)}>
+            <li key={project.id} className="mb-4 pr-10 pl-5" onClick={() => onProjectClick(project)}> 
               <ProjectCard project={project} enableDelete={enableDelete} />
             </li>
           ))}
         </>
-      ) : null}
+      ) : (
+        <p>No projects available</p>
+      )}
       {showCreateProjectCard && (
         <li className="mb-4 pr-10 pl-5">
           <ProjectCard createProject />

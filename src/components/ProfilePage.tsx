@@ -14,7 +14,6 @@ const ProfilePage = () => {
     bio: '',
     technologies: '',
     socials: '',
-    profileImage: 'default-avatar.png',
   });
   const [initialUser, setInitialUser] = useState(null);
 
@@ -32,20 +31,6 @@ const ProfilePage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
-  };
-
-  const handleImageChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // You would typically upload the file to your server or a cloud storage service
-      // and get the URL of the uploaded image. Here we'll simulate this step:
-      const imageUrl = URL.createObjectURL(file); // Temporarily use a local URL for preview
-      setUser((prevUser) => ({ ...prevUser, profileImage: imageUrl }));
-
-      // You should then upload the image to your backend, and save the returned URL
-      // const uploadedUrl = await uploadImage(file); // Implement this function in your backend
-      // setUser((prevUser) => ({ ...prevUser, profileImage: uploadedUrl }));
-    }
   };
 
   const handleSubmit = async (e) => {
@@ -85,26 +70,11 @@ const ProfilePage = () => {
       <div className="flex-1">
         <div className="bg-white p-10 rounded-lg shadow-md w-full">
           <div className="flex items-center">
-            <div className="relative">
-              <img
-                src={user.profileImage}
-                alt="Profile Image"
-                className="w-36 h-36 rounded-full"
-              />
-              <input
-                type="file"
-                accept="image/*"
-                id="profileImageUpload"
-                onChange={handleImageChange}
-                className="hidden"
-              />
-              <label
-                htmlFor="profileImageUpload"
-                className="absolute bottom-0 right-0 bg-blue-500 text-white text-sm py-1 px-2 rounded-full cursor-pointer"
-              >
-                Edit
-              </label>
-            </div>
+            <img
+              src="default-avatar.png"
+              alt="Profile Image"
+              className="w-36 h-36 rounded-full"
+            />
             <div className="ml-6">
               <input
                 type="text"

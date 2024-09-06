@@ -8,7 +8,7 @@ interface ProjectPageProps {
 }
 
 const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
-  const { data: session } = useSession(); // Get the session data
+  const { data: session } = useSession();
   const openRoles = project?.openRoles || [];
   const displayOpenRoles = openRoles.length > 2 ? `${openRoles.slice(0, 2).join(', ')}, +${openRoles.length - 2} more` : openRoles.join(', ');
 

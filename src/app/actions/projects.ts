@@ -6,6 +6,7 @@ import {
   doc,
   deleteDoc,
   collection,
+  getDoc,
   getDocs,
   query,
   where,
@@ -45,7 +46,21 @@ export async function getAllProjectsByEmail(email: string) {
   }
 }
 
+export async function getProjectById(projectId: string) {
+  try {
+    const projectRef = doc(db, 'projects', projectId);
+    const projectSnap = await getDoc(projectRef);
 
+    if (projectSnap.exists()) {
+      return { ok: true, project: { id: projectSnap.id, ...projectSnap.data() } as Project };
+    } else {
+      return { ok: false, message: 'Project not found' };
+    }
+  } catch (error) {
+    console.error('projects/getProjectById:', error);
+    return { ok: false, message: 'Failed to fetch project, please try again.' };
+  }
+}
 
 export async function createNewProject(user: { name: string; email: string }, formData: FormData) {
   try {
