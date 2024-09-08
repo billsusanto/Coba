@@ -1,11 +1,11 @@
-'use client'
-
 import Landing from "@/src/components/Landing";
+import { redirect } from "next/navigation";
 
 export default function App() {
-  return (
-    <main>
-      <Landing />
-    </main>
-  );
+  redirect("/projects");
+  // return (
+  //   <main>
+  //     <Landing />
+  //   </main>
+  // );
 }

@@ -1,32 +1,37 @@
-'use client';
-import { useState, ChangeEvent, FormEvent, KeyboardEvent } from 'react';
-import { useSession } from 'next-auth/react';
-import { createNewProject } from '../app/actions/projects';
-import Autosuggest, { SuggestionSelectedEventData } from 'react-autosuggest';
-import { interestsList, rolesList, usCitiesList } from '../app/constants/constants';
+"use client";
+import { useState, ChangeEvent, FormEvent, KeyboardEvent } from "react";
+import { useSession } from "next-auth/react";
+import { createNewProject } from "../app/actions/projects";
+import Autosuggest, { SuggestionSelectedEventData } from "react-autosuggest";
+import {
+  interestsList,
+  rolesList,
+  usCitiesList,
+} from "../app/constants/constants";
 
 const getSuggestions = (list: string[], value: string) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
-  return inputLength === 0 ? [] : list.filter(
-    item => item.toLowerCase().startsWith(inputValue)
-  );
+  return inputLength === 0
+    ? []
+    : list.filter((item) => item.toLowerCase().startsWith(inputValue));
 };
 
 const getSuggestionValue = (suggestion: string) => suggestion;
 
 const renderSuggestion = (suggestion: string) => (
-  <div className="suggestion">
-    {suggestion}
-  </div>
+  <div className="suggestion">{suggestion}</div>
 );
 
 export default function NewProjectForm() {
   const { data: session } = useSession();
-  const [formState, setFormState] = useState<{ ok: boolean, message: string }>({ ok: true, message: '' });
-  const [interest, setInterest] = useState<string>('');
-  const [role, setRole] = useState<string>('');
-  const [location, setLocation] = useState<string>('');
+  const [formState, setFormState] = useState<{ ok: boolean; message: string }>({
+    ok: true,
+    message: "",
+  });
+  const [interest, setInterest] = useState<string>("");
+  const [role, setRole] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [roleSuggestions, setRoleSuggestions] = useState<string[]>([]);
   const [locationSuggestions, setLocationSuggestions] = useState<string[]>([]);
@@ -36,20 +41,20 @@ export default function NewProjectForm() {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     if (!session || !session.user) {
-      setFormState({ ok: false, message: 'User session is not available.' });
+      setFormState({ ok: false, message: "User session is not available." });
       return;
     }
     const formData = new FormData(event.target as HTMLFormElement);
-    formData.append('interests', selectedInterests.join(', '));
-    formData.append('openRoles', selectedRoles.join(', '));
-    formData.append('location', location);
+    formData.append("interests", selectedInterests.join(", "));
+    formData.append("openRoles", selectedRoles.join(", "));
+    formData.append("location", location);
     const user = {
-      name: session.user.name || '',
-      email: session.user.email || '',
+      name: session.user.name || "",
+      email: session.user.email || "",
     };
     try {
       await createNewProject(user, formData);
-      setFormState({ ok: true, message: 'Project created successfully!' });
+      setFormState({ ok: true, message: "Project created successfully!" });
     } catch (error: any) {
       setFormState({ ok: false, message: error.message });
     }
@@ -71,7 +76,11 @@ export default function NewProjectForm() {
     setRoleSuggestions([]);
   };
 
-  const onLocationSuggestionsFetchRequested = ({ value }: { value: string }) => {
+  const onLocationSuggestionsFetchRequested = ({
+    value,
+  }: {
+    value: string;
+  }) => {
     setLocationSuggestions(getSuggestions(usCitiesList, value));
   };
 
@@ -83,41 +92,58 @@ export default function NewProjectForm() {
     setInterest(newValue);
   };
 
-  const onRoleChange = (event: ChangeEvent, { newValue }: { newValue: string }) => {
+  const onRoleChange = (
+    event: ChangeEvent,
+    { newValue }: { newValue: string }
+  ) => {
     setRole(newValue);
   };
 
-  const onLocationChange = (event: ChangeEvent, { newValue }: { newValue: string }) => {
+  const onLocationChange = (
+    event: ChangeEvent,
+    { newValue }: { newValue: string }
+  ) => {
     setLocation(newValue);
   };
 
-  const onSuggestionSelected = (event: FormEvent, { suggestion }: SuggestionSelectedEventData<string>) => {
+  const onSuggestionSelected = (
+    event: FormEvent,
+    { suggestion }: SuggestionSelectedEventData<string>
+  ) => {
     if (!selectedInterests.includes(suggestion)) {
       setSelectedInterests([...selectedInterests, suggestion]);
-      setInterest('');
+      setInterest("");
     }
     event.preventDefault();
   };
 
-  const onRoleSuggestionSelected = (event: FormEvent, { suggestion }: SuggestionSelectedEventData<string>) => {
+  const onRoleSuggestionSelected = (
+    event: FormEvent,
+    { suggestion }: SuggestionSelectedEventData<string>
+  ) => {
     if (!selectedRoles.includes(suggestion)) {
       setSelectedRoles([...selectedRoles, suggestion]);
-      setRole('');
+      setRole("");
     }
     event.preventDefault();
   };
 
-  const onLocationSuggestionSelected = (event: FormEvent, { suggestion }: SuggestionSelectedEventData<string>) => {
+  const onLocationSuggestionSelected = (
+    event: FormEvent,
+    { suggestion }: SuggestionSelectedEventData<string>
+  ) => {
     setLocation(suggestion);
     event.preventDefault();
   };
 
   const removeInterest = (interestToRemove: string) => {
-    setSelectedInterests(selectedInterests.filter(interest => interest !== interestToRemove));
+    setSelectedInterests(
+      selectedInterests.filter((interest) => interest !== interestToRemove)
+    );
   };
 
   const removeRole = (roleToRemove: string) => {
-    setSelectedRoles(selectedRoles.filter(role => role !== roleToRemove));
+    setSelectedRoles(selectedRoles.filter((role) => role !== roleToRemove));
   };
 
   return (
@@ -125,8 +151,8 @@ export default function NewProjectForm() {
       onSubmit={handleSubmit}
       className="flex flex-col gap-4 w-one-third-width mx-auto border border-gray-600 rounded-3xl bg-gray-100 text-2xl p-10"
     >
-      <div className='flex flex-col items-center'>
-        <span className='font-bold'>New Project</span>
+      <div className="flex flex-col items-center">
+        <span className="font-bold">New Project</span>
       </div>
       <div className="flex flex-col">
         <label htmlFor="title" className="mb-2 font-bold">
@@ -136,7 +162,7 @@ export default function NewProjectForm() {
           type="text"
           id="title"
           name="title"
-          placeholder='Project Title'
+          placeholder="Project Title"
           required
           className="p-3 border-2 border-gray-200 rounded-2xl"
         />
@@ -154,21 +180,21 @@ export default function NewProjectForm() {
           inputProps={{
             value: location,
             onChange: onLocationChange,
-            className: 'p-3 border-2 border-gray-100 rounded-2xl w-full',
-            placeholder: 'City, State, Country',
+            className: "p-3 border-2 border-gray-100 rounded-2xl w-full",
+            placeholder: "City, State, Country",
             onKeyDown: (e: KeyboardEvent) => {
-              if (e.key === 'Enter' && location) {
+              if (e.key === "Enter" && location) {
                 setLocation(location);
                 e.preventDefault();
               }
-            }
+            },
           }}
           onSuggestionSelected={onLocationSuggestionSelected}
           theme={{
-            suggestionsContainer: 'suggestions-container',
-            suggestionsList: 'suggestions-list',
-            suggestion: 'suggestion',
-            suggestionHighlighted: 'suggestion-highlighted'
+            suggestionsContainer: "suggestions-container",
+            suggestionsList: "suggestions-list",
+            suggestion: "suggestion",
+            suggestionHighlighted: "suggestion-highlighted",
           }}
         />
       </div>
@@ -179,7 +205,7 @@ export default function NewProjectForm() {
         <textarea
           id="description"
           name="description"
-          placeholder='Short Description'
+          placeholder="Short Description"
           className="p-3 border-2 border-gray-200 rounded-2xl"
         />
       </div>
@@ -190,7 +216,7 @@ export default function NewProjectForm() {
         <textarea
           id="masterplan"
           name="masterplan"
-          placeholder='Hidden Description'
+          placeholder="Hidden Description"
           className="p-2 border-2 border-gray-200 rounded-2xl"
         />
       </div>
@@ -207,27 +233,34 @@ export default function NewProjectForm() {
           inputProps={{
             value: interest,
             onChange: onChange,
-            className: 'p-2 border-2 border-gray-100 rounded-2xl w-full',
-            placeholder: 'Interest Tags',
+            className: "p-2 border-2 border-gray-100 rounded-2xl w-full",
+            placeholder: "Interest Tags",
             onKeyDown: (e: KeyboardEvent) => {
-              if (e.key === 'Enter' && interest && !selectedInterests.includes(interest)) {
+              if (
+                e.key === "Enter" &&
+                interest &&
+                !selectedInterests.includes(interest)
+              ) {
                 setSelectedInterests([...selectedInterests, interest]);
-                setInterest('');
+                setInterest("");
                 e.preventDefault();
               }
-            }
+            },
           }}
           onSuggestionSelected={onSuggestionSelected}
           theme={{
-            suggestionsContainer: 'suggestions-container',
-            suggestionsList: 'suggestions-list',
-            suggestion: 'suggestion',
-            suggestionHighlighted: 'suggestion-highlighted'
+            suggestionsContainer: "suggestions-container",
+            suggestionsList: "suggestions-list",
+            suggestion: "suggestion",
+            suggestionHighlighted: "suggestion-highlighted",
           }}
         />
         <div className="flex flex-wrap gap-2 mt-2 overflow-y-auto">
-          {selectedInterests.map(interest => (
-            <div key={interest} className="flex items-center bg-gray-200 p-2 rounded-2xl">
+          {selectedInterests.map((interest) => (
+            <div
+              key={interest}
+              className="flex items-center bg-gray-200 p-2 rounded-2xl"
+            >
               {interest}
               <button
                 type="button"
@@ -254,27 +287,30 @@ export default function NewProjectForm() {
           inputProps={{
             value: role,
             onChange: onRoleChange,
-            className: 'p-2 border-2 border-gray-100 rounded-2xl w-full',
-            placeholder: 'Open Roles',
+            className: "p-2 border-2 border-gray-100 rounded-2xl w-full",
+            placeholder: "Open Roles",
             onKeyDown: (e: KeyboardEvent) => {
-              if (e.key === 'Enter' && role && !selectedRoles.includes(role)) {
+              if (e.key === "Enter" && role && !selectedRoles.includes(role)) {
                 setSelectedRoles([...selectedRoles, role]);
-                setRole('');
+                setRole("");
                 e.preventDefault();
               }
-            }
+            },
           }}
           onSuggestionSelected={onRoleSuggestionSelected}
           theme={{
-            suggestionsContainer: 'suggestions-container',
-            suggestionsList: 'suggestions-list',
-            suggestion: 'suggestion',
-            suggestionHighlighted: 'suggestion-highlighted'
+            suggestionsContainer: "suggestions-container",
+            suggestionsList: "suggestions-list",
+            suggestion: "suggestion",
+            suggestionHighlighted: "suggestion-highlighted",
           }}
         />
         <div className="flex flex-wrap gap-2 mt-2 overflow-y-auto">
-          {selectedRoles.map(role => (
-            <div key={role} className="flex items-center bg-gray-200 p-2 rounded-2xl">
+          {selectedRoles.map((role) => (
+            <div
+              key={role}
+              className="flex items-center bg-gray-200 p-2 rounded-2xl"
+            >
               {role}
               <button
                 type="button"
@@ -289,12 +325,14 @@ export default function NewProjectForm() {
       </div>
 
       <button
-          type="submit"
-          className="p-3 border-none rounded-2xl bg-gray-800 text-white cursor-pointer w-full"
+        type="submit"
+        className="p-3 border-none rounded-2xl bg-gray-800 text-white cursor-pointer w-full"
       >
-          Add Project
+        Add Project
       </button>
-      {formState && !formState.ok && <p className="text-red-500">{formState.message}</p>}
+      {formState && !formState.ok && (
+        <p className="text-red-500">{formState.message}</p>
+      )}
     </form>
   );
 }

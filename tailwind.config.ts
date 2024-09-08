@@ -25,14 +25,14 @@ const config: Config = {
         'one-third-screen': '40vh',
         'two-third-screen': '80vh',
         'projectPage': 'calc(100vh - 13.5rem)',
-        'profilePage': 'calc(100vh - 30rem)',
+        'profilePage': 'calc(100vh - 55rem)',
       },
       width: {
         'search-bar': '30vw',
         'half-screen-width' : '50vw',
         'one-third-width' : '45%',
         'projectPage': '63vw',
-        'profilePage': '63vw',
+        'profilePage': '85vw',
       },
       boxShadow: {
         'blueShadow': '0 8px 20px 5px rgba(66, 153, 225, 0.5), 0 4px 8px 5px rgba(66, 153, 225, 0.3)',

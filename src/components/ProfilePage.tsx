@@ -11,8 +11,6 @@ const ProfilePage = () => {
     name: '',
     major: '',
     school: '',
-    bio: '',
-    technologies: '',
     socials: '',
   });
   const [initialUser, setInitialUser] = useState(null);
@@ -39,7 +37,7 @@ const ProfilePage = () => {
 
     Object.keys(user).forEach((key) => {
       if (user[key] !== initialUser[key]) {
-        if (key === 'technologies' || key === 'socials') {
+        if (key === 'socials') {
           changes[key] = user[key].split(',').map((item) => item.trim());
         } else {
           changes[key] = user[key];
@@ -66,7 +64,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="flex bg-gray-300 min-h-screen w-profilePage pt-5">
+    <div className="flex bg-gray-300 h-full pl-8">
       <div className="flex-1">
         <div className="bg-white p-10 rounded-lg shadow-md w-full">
           <div className="flex items-center">
@@ -102,28 +100,7 @@ const ProfilePage = () => {
               />
             </div>
           </div>
-          <form onSubmit={handleSubmit} className="mt-10 border border-gray-300 rounded-xl h-profilePage p-6 relative">
-            <div className="pt-4">
-              <label className="block text-3xl font-bold mb-2">Bio:</label>
-              <textarea
-                name="bio"
-                value={user.bio}
-                placeholder='Tell others more about yourself!'
-                onChange={handleChange}
-                className="w-full p-2 border rounded-lg text-xl"
-              />
-            </div>
-            <div className="pt-4">
-              <label className="block text-3xl font-bold mb-2">Technologies:</label>
-              <input
-                type="text"
-                name="technologies"
-                placeholder='i.e. Next.js'
-                value={user.technologies}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-lg text-xl"
-              />
-            </div>
+          <form onSubmit={handleSubmit} className="mt-10 rounded-xl h-profilePage p-6 relative">
             <div className="pt-4">
               <label className="block text-3xl font-bold mb-2">Socials:</label>
               <input

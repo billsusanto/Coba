@@ -35,7 +35,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
   };
 
   return (
-    <div className="w-projectPage h-projectPage pt-5">
+    <div className="w-projectPage h-projectPage">
       <div className="bg-white rounded-lg shadow-md pl-10 pr-10 pl-7 pt-7 h-full">
         {project ? (
           <>

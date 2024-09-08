@@ -3,10 +3,14 @@ import { getAllProjects } from "../actions/projects";
 import { getProjectById } from "../actions/projects";
 import { getServerAuthSession } from "@/src/server/auth";
 
-export default async function ProjectsPage({ params }: { params: { id?: string } }) {
+export default async function ProjectsPage({
+  params,
+}: {
+  params: { id?: string };
+}) {
   const res = await getAllProjects();
   const session = await getServerAuthSession();
-  
+
   const selectedProjectId = params?.id;
   let selectedProject = null;
 
@@ -15,9 +19,5 @@ export default async function ProjectsPage({ params }: { params: { id?: string }
     selectedProject = projectRes.project;
   }
 
-  return (
-    <main>
-      <Projects projects={res.projects} selectedProject={selectedProject} />
-    </main>
-  );
+  return <Projects projects={res.projects} selectedProject={selectedProject} />;
 }

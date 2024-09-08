@@ -12,13 +12,13 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="w-64 h-screen bg-gray-sidebar flex flex-col p-5 fixed">
+    <div className="w-64 h-screen bg-gray-sidebar flex flex-col flex-shrink-0 p-5">
       <Link href="/" className="text-5xl text-white p-10 flex justify-center">
         Coba.
       </Link>
-      <Link href="/home" className="text-2xl text-white p-7 m-2 rounded-xl hover:bg-gray-sidebar-hover flex items-center">
+      {/* <Link href="/home" className="text-2xl text-white p-7 m-2 rounded-xl hover:bg-gray-sidebar-hover flex items-center">
         <House className="mr-4" /> Home
-      </Link>
+      </Link> */}
       <Link href="/projects" className="text-2xl text-white p-7 m-2 rounded-xl hover:bg-gray-sidebar-hover flex items-center">
         <FolderGit2 className="mr-4" /> Projects
       </Link>

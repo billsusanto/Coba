@@ -17,7 +17,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, createProject = fals
   if (createProject) {
     return (
       <Link href="/create-project">
-        <div className="mb-4 p-4 border-2 border-dotted border-gray-700 bg-gray-100 flex justify-center items-center rounded-xl hover:border-gray-900 hover:scale-105 transform transition-transform duration-300 ease-in-out" style={{ width: '20vw', height: '20vh' }}>
+        <div className="mb-4 p-4 border-2 border-dotted border-gray-700 bg-gray-100 flex justify-center items-center rounded-xl hover:shadow-2xl transform transition-all w-[20vw] h-[20vh]">
           <SquarePlus size={96} className="text-gray-300" />
         </div>
       </Link>
@@ -31,7 +31,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, createProject = fals
   const interestsList = interests.join(', ');
 
   return (
-    <div className="bg-white shadow-lg rounded-xl flex flex-col justify-between hover:border hover:border-blue-500 hover:scale-105 transform transition-transform duration-300 ease-in-out" style={{ width: '20vw', height: 'auto' }}>
+    <div className="bg-white shadow-lg rounded-lg flex flex-col justify-between hover:shadow-2xl transform transition-all cursor-pointer w-[20vw]">
       <div className="pl-10 pt-10 pr-10 flex-grow">
         <div className="font-bold text-3xl">
           {project.title} 
