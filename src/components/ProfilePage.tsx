@@ -4,22 +4,19 @@ import React, { useState, useEffect } from "react";
 import { editProfile, getUserData } from "../app/actions/profile";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { User } from "../app/types/user";
+
+type Changes = Partial<User>;
 
 const ProfilePage = () => {
   const { data: session, status } = useSession();
-  const [user, setUser] = useState({
-    email: "",
-    name: "",
-    major: "",
-    school: "",
-    socials: "",
-  });
-  const [initialUser, setInitialUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [initialUser, setInitialUser] = useState<User | null>(null);
 
   useEffect(() => {
     if (status === "authenticated" && session?.user?.email) {
       const fetchUser = async () => {
-        const email = session.user?.email ?? '';
+        const email = session.user?.email ?? "";
         const userData = await getUserData(email);
         setUser(userData);
         setInitialUser(userData);
@@ -28,24 +25,29 @@ const ProfilePage = () => {
     }
   }, [status, session]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUser((prevUser) => ({ ...prevUser, [name]: value }));
+    setUser((prevUser) => {
+      if (!prevUser) return null;
+      return { ...prevUser, [name]: value };
+    });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const changes = {};
+    const changes: Changes = {};
 
-    Object.keys(user).forEach((key) => {
-      if (user[key] !== initialUser[key]) {
-        if (key === "socials") {
-          changes[key] = user[key].split(",").map((item) => item.trim());
-        } else {
-          changes[key] = user[key];
+    if (user) {
+      Object.keys(user).forEach((key) => {
+        if ((user as any)[key] !== (initialUser as any)[key]) {
+          if (key === "socials") {
+            changes[key] = (user as any)[key].split(",").map((item: string) => item.trim());
+          } else {
+            changes[key as keyof User] = (user as any)[key];
+          }
         }
-      }
-    });
+      });
+    }
 
     if (Object.keys(changes).length === 0) {
       alert("No changes detected");
@@ -53,7 +55,11 @@ const ProfilePage = () => {
     }
 
     try {
-      await editProfile({ email: user.email, ...changes });
+      const definedChanges = Object.fromEntries(
+        Object.entries(changes).filter(([_, v]) => v !== undefined)
+      ) as User;
+      const { email, ...otherChanges } = definedChanges;
+      await editProfile({ email: user!.email, ...otherChanges });
       alert("Profile updated successfully!");
     } catch (error) {
       console.error("Failed to update profile:", error);
@@ -71,16 +77,18 @@ const ProfilePage = () => {
         <div className="bg-white p-10 w-full">
           <div className="flex items-center">
             <Image
-              src="default-avatar.png"
+              src="/default-avatar.png"
               alt="Profile Image"
+              width={72}
+              height={72}
               className="w-36 h-36 rounded-full"
             />
             <div className="ml-6">
               <input
                 type="text"
                 name="name"
-                placeholder={session.user.name}
-                value={user.name}
+                placeholder={session.user?.name || "Enter your name"}
+                value={user?.name ?? ""}
                 onChange={handleChange}
                 className="text-3xl font-bold text-black w-full mt-2 p-2 rounded-lg"
               />
@@ -88,7 +96,7 @@ const ProfilePage = () => {
                 type="text"
                 name="school"
                 placeholder="Enter your school"
-                value={user.school}
+                value={user?.school ?? ""}
                 onChange={handleChange}
                 className="text-lg font-semibold text-black w-full p-2 rounded-lg"
               />
@@ -96,7 +104,7 @@ const ProfilePage = () => {
                 type="text"
                 name="major"
                 placeholder="Enter your major"
-                value={user.major}
+                value={user?.major ?? ""}
                 onChange={handleChange}
                 className="text-lg text-gray-500 w-full p-2 rounded-lg"
               />
@@ -112,7 +120,7 @@ const ProfilePage = () => {
                 type="text"
                 name="socials"
                 placeholder="Share your social links!"
-                value={user.socials}
+                value={user?.socials ?? ''}
                 onChange={handleChange}
                 className="w-full p-2 border rounded-lg text-xl"
               />

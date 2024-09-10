@@ -12,6 +12,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { revalidatePath } from 'next/cache';
+import { Project } from '../types/project';
 
 export async function getAllProjects() {
   try {

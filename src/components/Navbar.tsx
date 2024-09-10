@@ -23,7 +23,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollTop]);
 
-  const handleScrollToProjects = (event) => {
+  const handleScrollToProjects = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     const element = document.getElementById('projects-section');
     if (element) {
@@ -31,7 +31,7 @@ const Navbar = () => {
     }
   };
 
-  const handleLogout = async (event) => {
+  const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     await signOut({ callbackUrl: '/' });
   };

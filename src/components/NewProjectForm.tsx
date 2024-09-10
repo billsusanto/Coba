@@ -88,19 +88,22 @@ export default function NewProjectForm() {
     setLocationSuggestions([]);
   };
 
-  const onChange = (event: ChangeEvent, { newValue }: { newValue: string }) => {
+  const onChange = (
+    event: React.FormEvent<HTMLElement>,
+    { newValue }: { newValue: string }
+  ) => {
     setInterest(newValue);
   };
 
   const onRoleChange = (
-    event: ChangeEvent,
+    event: React.FormEvent<HTMLElement>,
     { newValue }: { newValue: string }
   ) => {
     setRole(newValue);
   };
 
   const onLocationChange = (
-    event: ChangeEvent,
+    event: React.FormEvent<HTMLElement>,
     { newValue }: { newValue: string }
   ) => {
     setLocation(newValue);

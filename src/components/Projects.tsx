@@ -7,9 +7,15 @@ import Link from "next/link";
 import { Project } from "../app/types/project";
 import { SearchBar } from "./Searchbar";
 
-export default function Projects({ projects }: { projects: Project[] }) {
+interface ProjectsProps {
+  projects: Project[];
+  selectedProject: Project | null;
+  initialSelectedProject?: Project | null;
+}
+
+export default function Projects({ projects, initialSelectedProject }: ProjectsProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(
-    projects.length > 0 ? projects[0] : null
+    initialSelectedProject || (projects.length > 0 ? projects[0] : null)
   );
   // const [searchedProjects, ssp]
 

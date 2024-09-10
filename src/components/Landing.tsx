@@ -98,12 +98,12 @@ const Landing = () => {
                         onMouseEnter={() => handleMouseEnter('Create')} 
                         onMouseLeave={handleMouseLeave}
                         >
-                            <Image
+                            {/* <Image
                                 src={hoveredTab === 'Create' ? "/create.svg" : "/create.png"}
                                 alt="Create"
                                 width={35}
                                 height={35}
-                            />
+                            /> */}
                             <p className={`ml-5 font-semibold text-2xl ${hoveredTab === 'Create' ? 'text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark' : ''}`}>Create</p>
                         </div>
                         <div className="mt-2 w-full">
@@ -117,12 +117,12 @@ const Landing = () => {
                         onMouseEnter={() => handleMouseEnter('Connect')} 
                         onMouseLeave={handleMouseLeave}
                         >
-                            <Image
+                            {/* <Image
                                 src={hoveredTab === 'Connect' ? "/connect.svg" : "/connect.png"}
                                 alt="Connect"
                                 width={35}
                                 height={35}
-                            />
+                            /> */}
                             <p className={`ml-5 font-semibold text-2xl ${hoveredTab === 'Connect' ? 'text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark' : ''}`}>Connect</p>
                         </div>
                         <div className="mt-2 w-full">
@@ -136,12 +136,12 @@ const Landing = () => {
                         onMouseEnter={() => handleMouseEnter('Collaborate')} 
                         onMouseLeave={handleMouseLeave}
                         >
-                            <Image
+                            {/* <Image
                                 src={hoveredTab === 'Collaborate' ? "/collaborate.svg" : "/collaborate.png"}
                                 alt="Collaborate"
                                 width={35}
                                 height={35}
-                            />
+                            /> */}
                             <p className={`ml-5 font-semibold text-2xl ${hoveredTab === 'Collaborate' ? 'text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark' : ''}`}>Collaborate</p>
                         </div>
                         <div className="mt-2 w-full">

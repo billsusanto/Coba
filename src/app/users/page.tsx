@@ -16,7 +16,7 @@ export default function FriendsList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (session && session.user) {
+    if (session?.user?.email) {
       loadFriends(session.user.email);
     }
   }, [session]);

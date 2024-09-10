@@ -19,19 +19,16 @@ const Steps = () => {
           observer.disconnect();
         }
       },
-      {
-        threshold: 0.1,
-      }
+      { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, []);
 
@@ -43,19 +40,16 @@ const Steps = () => {
           observerRight.disconnect();
         }
       },
-      {
-        threshold: 0.1,
-      }
+      { threshold: 0.1 }
     );
 
-    if (sectionRightRef.current) {
-      observerRight.observe(sectionRightRef.current);
+    const currentRefRight = sectionRightRef.current;
+    if (currentRefRight) {
+      observerRight.observe(currentRefRight);
     }
 
     return () => {
-      if (sectionRightRef.current) {
-        observerRight.unobserve(sectionRightRef.current);
-      }
+      if (currentRefRight) observerRight.unobserve(currentRefRight);
     };
   }, []);
 
@@ -67,25 +61,23 @@ const Steps = () => {
           observerLeft.disconnect();
         }
       },
-      {
-        threshold: 0.1,
-      }
+      { threshold: 0.1 }
     );
 
-    if (sectionLeftRef.current) {
-      observerLeft.observe(sectionLeftRef.current);
+    const currentRefLeft = sectionLeftRef.current;
+    if (currentRefLeft) {
+      observerLeft.observe(currentRefLeft);
     }
 
     return () => {
-      if (sectionLeftRef.current) {
-        observerLeft.unobserve(sectionLeftRef.current);
-      }
+      if (currentRefLeft) observerLeft.unobserve(currentRefLeft);
     };
   }, []);
 
   return (
     <div className="py-20 relative bg-white">
       <div className="container mx-auto">
+        {/* Step 1 */}
         <div className="flex items-center justify-between mb-20">
           <div ref={sectionRef} className={`w-2/5 ${isVisible ? 'fadeInLeft' : ''}`}>
             <div className="flex items-center mb-4">
@@ -95,25 +87,26 @@ const Steps = () => {
               <h2 className="text-5xl text-black font-semibold">Find Projects</h2>
             </div>
             <div className='pl-20'>
-                <p className="mb-4 text-gray-600 text-2xl">
+              <p className="mb-4 text-gray-600 text-2xl">
                 Find fellow students, and collaborate on projects to broaden your knowledge and experience.
-                </p>
-                <Link href="/collaborate" className="inline-block bg-transparent text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark border-2 border-customBlue-default rounded-md px-6 py-3 text-xl mt-8">
-                    Collaborate now
-                </Link>
+              </p>
+              <Link href="/collaborate" className="inline-block bg-transparent text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark border-2 border-customBlue-default rounded-md px-6 py-3 text-xl mt-8">
+                Collaborate now
+              </Link>
             </div>
           </div>
-          <div className="w-2/5 pl-13 pr-5">
+          <div className="w-2/5 pl-12 pr-5">
             <div className="group h-80 bg-gray-200 rounded-lg">
-              <Image
-                src=""
-                alt="Placeholder"
+              {/* <Image
+                src="/images/step1.png"  // Add your image source here
+                alt="Step 1"
                 className="w-full h-full object-cover rounded-lg group-hover:shadow-blueShadow shadow-2xl transition-shadow duration-500"
-              />
+              /> */}
             </div>
           </div>
         </div>
 
+        {/* Step 2 */}
         <div className="flex items-center justify-between mb-20">
           <div ref={sectionRightRef} className={`w-2/5 order-2 ${isVisibleRight ? 'fadeInRight' : ''}`}>
             <div className="flex items-center mb-4">
@@ -123,25 +116,26 @@ const Steps = () => {
               <h2 className="text-5xl text-black font-semibold">Join Teams</h2>
             </div>
             <div className='pl-20'>
-                <p className="mb-4 text-gray-600 text-2xl">
+              <p className="mb-4 text-gray-600 text-2xl">
                 Find fellow students, and collaborate on projects to broaden your knowledge and experience.
-                </p>
-                <Link href="/share" className="inline-block bg-transparent text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark border-2 border-customBlue-default rounded-md px-6 py-3 text-xl mt-8">
-                    Share your Idea
-                </Link>
+              </p>
+              <Link href="/share" className="inline-block bg-transparent text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark border-2 border-customBlue-default rounded-md px-6 py-3 text-xl mt-8">
+                Share your Idea
+              </Link>
             </div>
           </div>
-          <div className="w-2/5 pl-10 pr-8 order-1">
+          <div className="w-2/5 pl-12 pr-8 order-1">
             <div className="group h-80 bg-gray-200 rounded-lg">
-              <Image
-                src=""
-                alt="Placeholder"
+              {/* <Image
+                src="/images/step2.png"  // Add your image source here
+                alt="Step 2"
                 className="w-full h-full object-cover rounded-lg group-hover:shadow-blueShadow shadow-2xl transition-shadow duration-500"
-              />
+              /> */}
             </div>
           </div>
         </div>
 
+        {/* Step 3 */}
         <div className="flex items-center justify-between">
           <div ref={sectionLeftRef} className={`w-2/5 ${isVisibleLeft ? 'fadeInLeft' : ''}`}>
             <div className="flex items-center mb-4">
@@ -151,21 +145,21 @@ const Steps = () => {
               <h2 className="text-5xl text-black font-semibold">Collaborate</h2>
             </div>
             <div className='pl-20'>
-                <p className="mb-4 text-gray-600 text-2xl">
+              <p className="mb-4 text-gray-600 text-2xl">
                 Find fellow students, and collaborate on projects to broaden your knowledge and experience.
-                </p>
-                <Link href="/collaborate" className="inline-block bg-transparent text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark border-2 border-customBlue-default rounded-md px-6 py-3 text-xl mt-8">
-                    Collaborate now
-                </Link>
+              </p>
+              <Link href="/collaborate" className="inline-block bg-transparent text-transparent bg-clip-text bg-gradient-to-r from-customBlue-default to-customBlue-dark border-2 border-customBlue-default rounded-md px-6 py-3 text-xl mt-8">
+                Collaborate now
+              </Link>
             </div>
           </div>
-          <div className="w-2/5 pl-13 pr-5">
+          <div className="w-2/5 pl-12 pr-5">
             <div className="group h-80 bg-gray-200 rounded-lg">
-              <Image
-                src=""
-                alt="Placeholder"
+              {/* <Image
+                src="/images/step3.png"  // Add your image source here
+                alt="Step 3"
                 className="w-full h-full object-cover rounded-lg group-hover:shadow-blueShadow shadow-2xl transition-shadow duration-500"
-              />
+              /> */}
             </div>
           </div>
         </div>

@@ -12,4 +12,6 @@ type Project = {
     startDate: Date;
     endDate: Date;
     collaborate_requests: string[];
+    authorImage: string;
+    authorTitle: string;
 };

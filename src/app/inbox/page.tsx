@@ -21,7 +21,7 @@ export default function Inbox() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (session && session.user) {
+    if (session && session.user && session.user.email) {
       getRequests(session.user.email);
     }
   }, [session]);
@@ -29,8 +29,8 @@ export default function Inbox() {
   const getRequests = async (ownerEmail: string) => {
     try {
       const response = await getCollaborationRequests(ownerEmail);
-      if (response.ok) {
-        setRequests(response.collaborationRequests);
+      if (response.ok && Array.isArray(response.collaborationRequests)) {
+        setRequests(response.collaborationRequests as CollaborationRequest[]);
       } else {
         console.error("Failed to fetch collaboration requests.");
       }
@@ -44,7 +44,7 @@ export default function Inbox() {
   const handleAccept = async (projectId: string, collaboratorEmail: string) => {
     try {
       // Add the collaborator as a friend when accepting collaboration
-      if (session && session.user) {
+      if (session && session.user && session.user.email) {
         await addFriend(session.user.email, collaboratorEmail);
         await addFriend(collaboratorEmail, session.user.email);
       }

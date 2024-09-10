@@ -22,22 +22,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   enableDelete = false,
   scrollDirection = 'vertical',
 }) => {
+  const { data: session } = useSession();
+  const [isClicked, setIsClicked] = useState(false);
+
   if (createProject) {
     return (
       <div className="">
         <Link href="/create-project">
-          <div className="border-2 border-dotted border-gray-700 bg-gray-100 flex justify-center items-center rounded-xl shadow-md hover:shadow-xl transform transition-all w-[20vw] h-[20vh]">
+          <div className="border-2 border-dotted border-gray-700 bg-gray-100 flex justify-center items-center rounded-xl shadow-md hover:shadow-xl transform transition-all w-[20vw] h-[26vh]">
             <SquarePlus size={96} className="text-gray-300" />
           </div>
         </Link>
       </div>
     );
   }
-  const { data: session } = useSession();
+  
   const scrollClass =
-  scrollDirection === "horizontal"
-    ? "mr-5"
-    : "mb-5";
+    scrollDirection === "horizontal"
+      ? "mr-5"
+      : "mb-5";
 
   const handleCollaborateClick = async () => {
     if (!project || !session || !session.user) {
@@ -48,7 +51,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     try {
       const response = await requestToCollaborate(
         project.id,
-        session.user.email
+        session.user.email ?? '' // Provide a fallback empty string
       );
       if (response.success) {
         alert("Collaboration request sent successfully!");
@@ -69,13 +72,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   const interests = project?.interests || [];
   // const interestsList = interests.join(", ");
-  const [isClicked, setIsClicked] = useState(false);
 
   return (
     <div className={`bg-gray-50 shadow-md rounded-lg border border-gray-300 flex flex-col hover:shadow-xl transform transition-all cursor-pointer w-[20vw] h-[300px] ${scrollClass}`}>
       <div className="pl-10 pt-10 pr-10 flex-grow">
-        <div className="font-bold text-3xl">{project.title}</div>
-        <div className="mb-2 text-lg text-gray-500">{project.location}</div>
+        <div className="font-bold text-3xl">{project?.title}</div>
+        <div className="mb-2 text-lg text-gray-500">{project?.location}</div>
         {interests.length > 0 &&
           interests.some((interest) => interest.trim() !== "") && (
             <div className="mb-4 text-xl">
@@ -98,14 +100,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="flex items-center text-xl px-10 py-4 rounded-b-xl">
         <span className="mr-2 text-xl">By:</span>
         <Image
-          src={project.authorImage || "/default-avatar.png"}
+          src={project?.authorImage || "/default-avatar.png"}
           alt="Author Image"
           width={60}
           height={60}
           className="rounded-full mr-2"
         />
         <div>
-          <span>{project.author}</span>
+          <span>{project?.author}</span>
         </div>
         {!enableDelete && (
           <button
@@ -122,7 +124,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {enableDelete && (
           <button
-            onClick={() => deleteProject(project.id)}
+            onClick={() => project?.id && deleteProject(project.id)}
             className="ml-auto text-white bg-red-500 text-lg px-3 py-1 rounded-md"
           >
             Delete

@@ -24,6 +24,9 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
     }
 
     try {
+      if (!session.user?.email) {
+        throw new Error('User email is missing');
+      }
       const response = await requestToCollaborate(project.id, session.user.email);
       if (response.success) {
         alert('Collaboration request sent successfully!');
@@ -45,9 +48,11 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
             <p className="text-xl text-gray-600 mb-2">{project.location}</p>
             <div className="flex items-center mb-4">
               <Image
-                src={project.authorImage || 'default-avatar.png'}
+                src={project.authorImage || '/default-avatar.png'}
                 alt="Author Image"
-                className="w-12 h-12 rounded-full mr-4"
+                width={48}
+                height={48}
+                className="rounded-full mr-4 w-12 h-12"
               />
               <div>
                 <p className="text-xl font-bold">{project.author}</p>
