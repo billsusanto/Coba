@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Project } from '../app/types/project';
 import { requestToCollaborate } from '../app/actions/collaborate';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 interface ProjectPageProps {
   project: Project | null;
@@ -9,6 +10,7 @@ interface ProjectPageProps {
 
 const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
   const { data: session } = useSession();
+  const [isClicked, setIsClicked] = useState(false);
   const openRoles = project?.openRoles || [];
   const displayOpenRoles = openRoles.length > 2 ? `${openRoles.slice(0, 2).join(', ')}, +${openRoles.length - 2} more` : openRoles.join(', ');
 
@@ -36,13 +38,13 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
 
   return (
     <div className="w-projectPage h-projectPage">
-      <div className="bg-white rounded-lg shadow-md pl-10 pr-10 pl-7 pt-7 h-full">
+      <div className="bg-gray-50 border border-gray-300 rounded-lg shadow-xl p-10 pt-7 h-full">
         {project ? (
           <>
             <h2 className="text-6xl font-bold mb-4">{project.title}</h2>
             <p className="text-xl text-gray-600 mb-2">{project.location}</p>
             <div className="flex items-center mb-4">
-              <img
+              <Image
                 src={project.authorImage || 'default-avatar.png'}
                 alt="Author Image"
                 className="w-12 h-12 rounded-full mr-4"
@@ -52,10 +54,14 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
                 <p className="text-gray-600">{project.authorTitle}</p>
               </div>
               <button
-                onClick={handleCollaborateClick} // Attach the click handler
-                className="ml-auto bg-gray-800 text-white text-lg px-3 py-1 rounded-md"
+                onClick={handleCollaborateClick}
+                className={`ml-auto text-lg px-3 py-1 rounded-md transition-all duration-200 ${
+                  isClicked
+                    ? "bg-white text-black border border-black"
+                    : "bg-gray-800 text-white hover:bg-white hover:text-black hover:border hover:border-black"
+                }`}
               >
-                Collaborate
+                {isClicked ? "Sent" : "Collaborate"}
               </button>
             </div>
             <hr className="my-8 border-t-2 border-gray-200"/>

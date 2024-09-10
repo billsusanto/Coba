@@ -14,7 +14,7 @@ export function SearchBar() {
       <input
         type="text"
         placeholder="Search Projects"
-        className="bg-white pl-10 pr-5 py-2 border w-full h-14 text-xl rounded-full focus:outline-none focus:shadow-outline placeholder-gray-500"
+        className="bg-gray-50 pl-10 pr-5 py-2 w-full h-14 text-xl rounded-full border border-gray-300 focus:outline-none focus:shadow-outline placeholder-gray-500"
       />
     </form>
   );

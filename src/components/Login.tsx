@@ -43,7 +43,7 @@ const Login = () => {
               Log in with GitHub
             </button>
             <div className="text-center text-lg">
-              <span>Don't have an account? </span>
+              <span>Don&#39;t have an account? </span>
               <Link href="/signup" className="text-green-600">
                 Sign Up
               </Link>

@@ -22,24 +22,24 @@ const ProjectsList: React.FC<ProjectsListProps> = ({
   const scrollClass =
     scrollDirection === "horizontal"
       ? "flex-row overflow-x-scroll pt-10"
-      : "flex-col overflow-y-scroll";
+      : "flex-col overflow-y-scroll pl-10";
 
   return (
     <ul
-      className={`flex w-full ${scrollClass} list-none h-full rounded-md pb-10`}
+      className={`flex w-full ${scrollClass} list-none h-full rounded-md`}
     >
       {projects.map((project) => (
         <li
           key={project.id}
-          className="mb-4 px-8"
+          className="mb-4"
           onClick={() => onProjectClick(project)}
         >
-          <ProjectCard project={project} enableDelete={enableDelete} />
+          <ProjectCard project={project} enableDelete={enableDelete} scrollDirection="horizontal"/>
         </li>
       ))}
       {showCreateProjectCard && (
-        <li className="mb-4 pr-10 pl-5">
-          <ProjectCard createProject />
+        <li className="mb-4">
+          <ProjectCard createProject enableDelete={enableDelete} scrollDirection="horizontal"/>
         </li>
       )}
     </ul>

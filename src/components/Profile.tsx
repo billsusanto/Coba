@@ -22,9 +22,9 @@ export default function Profile({ projects }: { projects: Project[] }) {
   }, [projects]);
 
   return (
-    <div className="flex w-full bg-gray-300">
+    <div className="flex w-full bg-white">
       <div className="flex-grow overflow-auto flex flex-col pt-5">
-        <div className="flex justify-between items-center pb-5 px-8">
+        <div className="flex justify-between items-center pb-5 px-10">
           <SearchBar />
           <Link href="/create-project">
             <div className="bg-gray-800 text-white text-xl h-14 w-56 px-4 py-2 rounded-lg flex items-center justify-center ml-4">
@@ -38,7 +38,8 @@ export default function Profile({ projects }: { projects: Project[] }) {
             <ProfilePage />
           </div>
 
-          <div className="flex justify-center w-full h-auto">
+          <div className="flex justify-center w-full h-full px-10"> 
+            {/* h-80: 80 should be more than the height of each card */}
             {loading ? (
               <p>Loading...</p>
             ) : error ? (

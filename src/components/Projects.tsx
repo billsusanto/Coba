@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Sidebar from "./Sidebar";
 import ProjectsList from "./ProjectList";
 import ProjectPage from "./ProjectPage";
 import Link from "next/link";
@@ -21,9 +20,9 @@ export default function Projects({ projects }: { projects: Project[] }) {
   };
 
   return (
-    <div className="flex w-full bg-gray-300">
+    <div className="flex w-full bg-white">
       <div className="flex-1 flex flex-col pt-5">
-        <div className="flex justify-between items-center pb-5 px-8">
+        <div className="flex justify-between items-center pb-5 px-10">
           <SearchBar />
           <Link href="/create-project">
             <div className="bg-gray-800 text-white text-xl h-14 w-56 px-4 py-2 rounded-lg flex items-center justify-center ml-4">

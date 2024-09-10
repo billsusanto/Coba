@@ -1,24 +1,26 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { editProfile, getUserData } from '../app/actions/profile';
-import { useSession } from 'next-auth/react';
+import React, { useState, useEffect } from "react";
+import { editProfile, getUserData } from "../app/actions/profile";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const ProfilePage = () => {
   const { data: session, status } = useSession();
   const [user, setUser] = useState({
-    email: '',
-    name: '',
-    major: '',
-    school: '',
-    socials: '',
+    email: "",
+    name: "",
+    major: "",
+    school: "",
+    socials: "",
   });
   const [initialUser, setInitialUser] = useState(null);
 
   useEffect(() => {
-    if (status === 'authenticated' && session.user) {
+    if (status === "authenticated" && session?.user?.email) {
       const fetchUser = async () => {
-        const userData = await getUserData(session.user.email);
+        const email = session.user?.email ?? '';
+        const userData = await getUserData(email);
         setUser(userData);
         setInitialUser(userData);
       };
@@ -37,8 +39,8 @@ const ProfilePage = () => {
 
     Object.keys(user).forEach((key) => {
       if (user[key] !== initialUser[key]) {
-        if (key === 'socials') {
-          changes[key] = user[key].split(',').map((item) => item.trim());
+        if (key === "socials") {
+          changes[key] = user[key].split(",").map((item) => item.trim());
         } else {
           changes[key] = user[key];
         }
@@ -46,29 +48,29 @@ const ProfilePage = () => {
     });
 
     if (Object.keys(changes).length === 0) {
-      alert('No changes detected');
+      alert("No changes detected");
       return;
     }
 
     try {
       await editProfile({ email: user.email, ...changes });
-      alert('Profile updated successfully!');
+      alert("Profile updated successfully!");
     } catch (error) {
-      console.error('Failed to update profile:', error);
-      alert('Failed to update profile');
+      console.error("Failed to update profile:", error);
+      alert("Failed to update profile");
     }
   };
 
-  if (status !== 'authenticated') {
+  if (status !== "authenticated") {
     return <p>Loading...</p>;
   }
 
   return (
-    <div className="flex bg-gray-300 h-full pl-8">
+    <div className="flex h-full px-10">
       <div className="flex-1">
-        <div className="bg-white p-10 rounded-lg shadow-md w-full">
+        <div className="bg-white p-10 w-full">
           <div className="flex items-center">
-            <img
+            <Image
               src="default-avatar.png"
               alt="Profile Image"
               className="w-36 h-36 rounded-full"
@@ -85,7 +87,7 @@ const ProfilePage = () => {
               <input
                 type="text"
                 name="school"
-                placeholder='Enter your school'
+                placeholder="Enter your school"
                 value={user.school}
                 onChange={handleChange}
                 className="text-lg font-semibold text-black w-full p-2 rounded-lg"
@@ -93,20 +95,23 @@ const ProfilePage = () => {
               <input
                 type="text"
                 name="major"
-                placeholder='Enter your major'
+                placeholder="Enter your major"
                 value={user.major}
                 onChange={handleChange}
                 className="text-lg text-gray-500 w-full p-2 rounded-lg"
               />
             </div>
           </div>
-          <form onSubmit={handleSubmit} className="mt-10 rounded-xl h-profilePage p-6 relative">
+          <form
+            onSubmit={handleSubmit}
+            className="mt-10 rounded-xl h-profilePage p-6 relative"
+          >
             <div className="pt-4">
               <label className="block text-3xl font-bold mb-2">Socials:</label>
               <input
                 type="text"
                 name="socials"
-                placeholder='Share your social links!'
+                placeholder="Share your social links!"
                 value={user.socials}
                 onChange={handleChange}
                 className="w-full p-2 border rounded-lg text-xl"
