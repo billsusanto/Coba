@@ -1,5 +1,5 @@
 "use client";
-import { useState, ChangeEvent, FormEvent, KeyboardEvent } from "react";
+import { useState, FormEvent, KeyboardEvent } from "react";
 import { useSession } from "next-auth/react";
 import { createNewProject } from "../app/actions/projects";
 import Autosuggest, { SuggestionSelectedEventData } from "react-autosuggest";
@@ -42,6 +42,14 @@ export default function NewProjectForm() {
     event.preventDefault();
     if (!session || !session.user) {
       setFormState({ ok: false, message: "User session is not available." });
+      return;
+    }
+    if (selectedInterests.length === 0) {
+      setFormState({ ok: false, message: "Please add at least one interest tag." });
+      return;
+    }
+    if (selectedRoles.length === 0) {
+      setFormState({ ok: false, message: "Please add at least one open role." });
       return;
     }
     const formData = new FormData(event.target as HTMLFormElement);
@@ -152,10 +160,10 @@ export default function NewProjectForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-4 w-one-third-width mx-auto border border-gray-600 rounded-3xl bg-gray-100 text-2xl p-10"
+      className="flex flex-col gap-4 w-one-third-width mx-auto rounded-3xl bg-white text-2xl p-10"
     >
       <div className="flex flex-col items-center">
-        <span className="font-bold">New Project</span>
+        <span className="font-bold">New Project Form</span>
       </div>
       <div className="flex flex-col">
         <label htmlFor="title" className="mb-2 font-bold">
@@ -209,6 +217,7 @@ export default function NewProjectForm() {
           id="description"
           name="description"
           placeholder="Short Description"
+          required
           className="p-3 border-2 border-gray-200 rounded-2xl"
         />
       </div>
@@ -220,6 +229,7 @@ export default function NewProjectForm() {
           id="masterplan"
           name="masterplan"
           placeholder="Hidden Description"
+          required
           className="p-2 border-2 border-gray-200 rounded-2xl"
         />
       </div>
@@ -333,8 +343,10 @@ export default function NewProjectForm() {
       >
         Add Project
       </button>
-      {formState && !formState.ok && (
-        <p className="text-red-500">{formState.message}</p>
+      {formState && (
+        <p className={formState.ok ? "text-green-500" : "text-red-500"}>
+          {formState.message}
+        </p>
       )}
     </form>
   );

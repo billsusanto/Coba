@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Sidebar from "@/src/components/Sidebar";
 import ProjectsList from "@/src/components/ProjectList";
 import ProfilePage from "@/src/components/ProfilePage";
 import Link from "next/link";
 import { Project } from "../app/types/project";
-import { toast } from "sonner";
 import { SearchBar } from "./Searchbar";
 
 export default function Profile({ projects }: { projects: Project[] }) {
@@ -39,7 +37,6 @@ export default function Profile({ projects }: { projects: Project[] }) {
           </div>
 
           <div className="flex justify-center w-full h-full px-10"> 
-            {/* h-80: 80 should be more than the height of each card */}
             {loading ? (
               <p>Loading...</p>
             ) : error ? (

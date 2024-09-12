@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { getCollaborationRequests } from "../actions/collaborate";
 import { addFriend } from "../actions/friends";
 import { useSession } from "next-auth/react";
-import Sidebar from "@/src/components/Sidebar";
 
 interface CollaborationRequest {
   id: string;
@@ -43,7 +42,7 @@ export default function Inbox() {
 
   const handleAccept = async (projectId: string, collaboratorEmail: string) => {
     try {
-      // Add the collaborator as a friend when accepting collaboration
+      alert("This feature is still under construction 🚧");
       if (session && session.user && session.user.email) {
         await addFriend(session.user.email, collaboratorEmail);
         await addFriend(collaboratorEmail, session.user.email);
@@ -63,6 +62,7 @@ export default function Inbox() {
     projectId: string,
     collaboratorEmail: string
   ) => {
+    alert("This feature is still under construction 🚧");
     console.log(
       "Declined collaboration for project:",
       projectId,
@@ -78,7 +78,7 @@ export default function Inbox() {
   return (
     <div className="flex size-full justify-center items-center">
       {process.env.NODE_ENV === "development" ? (
-        <main className="p-10 flex-1 ml-64">
+        <main className="p-10 flex-1">
           <h1 className="text-3xl font-bold mb-5">Collaboration Requests</h1>
           {requests.length === 0 ? (
             <p>No collaboration requests at the moment.</p>

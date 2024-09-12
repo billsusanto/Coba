@@ -72,7 +72,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="flex h-full px-10">
+    <div className="flex h-full px-3">
       <div className="flex-1">
         <div className="bg-white p-10 w-full">
           <div className="flex items-center">
@@ -112,7 +112,7 @@ const ProfilePage = () => {
           </div>
           <form
             onSubmit={handleSubmit}
-            className="mt-10 rounded-xl h-profilePage p-6 relative"
+            className="mt-10 rounded-xl h-profilePage relative"
           >
             <div className="pt-4">
               <label className="block text-3xl font-bold mb-2">Socials:</label>

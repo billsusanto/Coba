@@ -1,68 +1,19 @@
-"use client";
+import { SearchBar } from "@/src/components/Searchbar";
+import UserList from "@/src/components/UserList";
+import Link from "next/link";
 
-import React, { useEffect, useState } from "react";
-import { getFriends } from "../actions/friends";
-import { useSession } from "next-auth/react";
-import Sidebar from "@/src/components/Sidebar";
-
-interface Friend {
-  id: string;
-  email: string;
-}
-
-export default function FriendsList() {
-  const { data: session } = useSession();
-  const [friends, setFriends] = useState<Friend[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (session?.user?.email) {
-      loadFriends(session.user.email);
-    }
-  }, [session]);
-
-  const loadFriends = async (userId: string) => {
-    try {
-      const response = await getFriends(userId);
-      if (response.ok) {
-        setFriends(response.friends);
-      } else {
-        console.error("Failed to fetch friends.");
-      }
-    } catch (error) {
-      console.error("Error fetching friends:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
+export default function UsersPage() {
   return (
-    <div className="flex size-full justify-center items-center">
-      {process.env.NODE_ENV === "development" ? (
-        <main className="p-10 flex-1 ml-64">
-          <h1 className="text-3xl font-bold mb-5">Your Friends</h1>
-          {friends.length === 0 ? (
-            <p>You have no friends added yet.</p>
-          ) : (
-            <ul className="space-y-4">
-              {friends.map((friend) => (
-                <li
-                  key={friend.id}
-                  className="bg-white p-5 rounded-lg shadow-md"
-                >
-                  <h2 className="text-xl font-bold">{friend.email}</h2>
-                </li>
-              ))}
-            </ul>
-          )}
-        </main>
-      ) : (
-        <p>This page is still under construction 🚧</p>
-      )}
+    <div className="flex flex-col w-full pt-5">
+        <div className="flex justify-between items-center px-10">
+          <SearchBar />
+          <Link href="/create-project">
+            <div className="bg-gray-800 text-white text-xl h-14 w-56 px-4 py-2 rounded-lg flex items-center justify-center ml-4">
+              Create Project +
+            </div>
+          </Link>
+        </div>
+      <UserList />
     </div>
   );
 }
