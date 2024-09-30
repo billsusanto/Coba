@@ -20,7 +20,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   createProject = false,
   enableDelete = false,
-  scrollDirection = 'vertical',
+  scrollDirection = "vertical",
 }) => {
   const { data: session } = useSession();
   const [isClicked, setIsClicked] = useState(false);
@@ -36,11 +36,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
     );
   }
-  
-  const scrollClass =
-    scrollDirection === "horizontal"
-      ? "mr-5"
-      : "mb-5";
+
+  const scrollClass = scrollDirection === "horizontal" ? "mr-5" : "mb-5";
 
   const handleCollaborateClick = async () => {
     if (!project || !session || !session.user) {
@@ -51,7 +48,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     try {
       const response = await requestToCollaborate(
         project.id,
-        session.user.email ?? '' // Provide a fallback empty string
+        session.user.email ?? ""
       );
       if (response.success) {
         alert("Collaboration request sent successfully!");
@@ -74,7 +71,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   // const interestsList = interests.join(", ");
 
   return (
-    <div className={`bg-gray-50 shadow-md rounded-lg border border-gray-300 flex flex-col hover:shadow-xl transform transition-all cursor-pointer w-[20vw] h-[300px] ${scrollClass}`}>
+    <div
+      className={`bg-gray-50 shadow-md rounded-lg border border-gray-300 flex flex-col hover:shadow-xl transform transition-all cursor-pointer w-[20vw] h-[300px] ${scrollClass}`}
+    >
       <div className="pl-10 pt-10 pr-10 flex-grow">
         <div className="font-bold text-3xl">{project?.title}</div>
         <div className="mb-2 text-lg text-gray-500">{project?.location}</div>
@@ -85,12 +84,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               <div className="flex flex-wrap gap-2 mt-2">
                 {interests
                   .filter((interest) => interest.trim() !== "")
+                  .flatMap((interest) => interest.split(',')) 
                   .map((interest, index) => (
                     <span
                       key={index}
                       className="inline-block px-4 py-2 border border-black rounded-full text-black text-base font-sm hover:bg-black hover:text-white transition-colors duration-200"
                     >
-                      {interest}
+                      {interest.trim()}
                     </span>
                   ))}
               </div>

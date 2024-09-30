@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getCollaborationRequests } from "../actions/collaborate";
+import {
+  getCollaborationRequests,
+  acceptCollaborationRequest,
+} from "../actions/collaborate";
 import { addFriend } from "../actions/friends";
 import { useSession } from "next-auth/react";
 
@@ -42,17 +45,24 @@ export default function Inbox() {
 
   const handleAccept = async (projectId: string, collaboratorEmail: string) => {
     try {
-      alert("This feature is still under construction 🚧");
-      if (session && session.user && session.user.email) {
-        await addFriend(session.user.email, collaboratorEmail);
-        await addFriend(collaboratorEmail, session.user.email);
-      }
-      console.log(
-        "Accepted collaboration for project:",
+      const result = await acceptCollaborationRequest(
         projectId,
-        "with:",
         collaboratorEmail
       );
+      if (result.success) {
+        console.log(
+          "Accepted collaboration for project:",
+          projectId,
+          "with:",
+          collaboratorEmail
+        );
+        if (session && session.user && session.user.email) {
+          await addFriend(session.user.email, collaboratorEmail);
+          await addFriend(collaboratorEmail, session.user.email);
+        }
+      } else {
+        console.error("Failed to accept collaboration request:", result.error);
+      }
     } catch (error) {
       console.error("Error accepting collaboration:", error);
     }
@@ -77,57 +87,70 @@ export default function Inbox() {
 
   return (
     <div className="flex size-full justify-center items-center">
-      {process.env.NODE_ENV === "development" ? (
-        <main className="p-10 flex-1">
-          <h1 className="text-3xl font-bold mb-5">Collaboration Requests</h1>
-          {requests.length === 0 ? (
-            <p>No collaboration requests at the moment.</p>
-          ) : (
-            <ul className="space-y-4">
-              {requests.map((request) => (
-                <li
-                  key={request.id}
-                  className="bg-white p-5 rounded-lg shadow-md"
-                >
-                  <h2 className="text-xl font-bold">{request.title}</h2>
-                  <p>{request.description}</p>
-                  <p className="text-gray-500">{request.location}</p>
-                  <div className="mt-4">
-                    <h3 className="text-lg font-bold mb-2">
-                      Collaboration Requests:
-                    </h3>
-                    <ul className="space-y-2">
-                      {request.collaborate_requests.map((collaboratorEmail) => (
-                        <li key={collaboratorEmail} className="flex space-x-3">
-                          <span className="flex-1">{collaboratorEmail}</span>
-                          <button
-                            onClick={() =>
-                              handleAccept(request.id, collaboratorEmail)
-                            }
-                            className="bg-green-500 text-white px-4 py-2 rounded-md"
-                          >
-                            Accept
-                          </button>
-                          <button
-                            onClick={() =>
-                              handleDecline(request.id, collaboratorEmail)
-                            }
-                            className="bg-red-500 text-white px-4 py-2 rounded-md"
-                          >
-                            Decline
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </main>
-      ) : (
-        <p>This page is still under construction 🚧</p>
-      )}
+      <main className="p-10 pt-16 flex-1">
+        <h1 className="text-5xl font-bold mb-5">Inbox</h1>
+        {requests.length === 0 ? (
+          <p>No collaboration requests at the moment.</p>
+        ) : (
+          <ul className="space-y-4">
+            {requests.map((request) => (
+              <li
+                key={request.id}
+                className="bg-white p-8 rounded-lg border border-gray-300 shadow-md flex items-center"
+              >
+                {/* Insert user image here */}
+                <div className="flex-grow">
+                  <p className="font-semibold text-2xl">
+                    {request.author}
+                    <span className="font-normal"> requested to join </span>
+                    {request.title}
+                  </p>
+                </div>
+                <div className="flex space-x-14">
+                  <button
+                    onClick={() => handleAccept(request.id, request.author)}
+                    className="text-black"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-10 w-10"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => handleDecline(request.id, request.author)}
+                    className="text-black"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-10 w-10"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </main>
     </div>
   );
 }

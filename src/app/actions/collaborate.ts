@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { db } from "../server/db";
 import {
   doc,
@@ -58,5 +59,65 @@ export async function getCollaborationRequests(ownerEmail: string) {
   } catch (error) {
     console.error("Error fetching collaboration requests:", error);
     return { ok: false, collaborationRequests: [] };
+  }
+}
+
+export async function acceptCollaborationRequest(projectId: string, acceptedEmail: string) {
+  try {
+    const projectRef = doc(db, "projects", projectId);
+    const projectSnap = await getDoc(projectRef);
+
+    if (projectSnap.exists()) {
+      const projectData = projectSnap.data();
+
+      // Remove the email from collaborate_requests
+      const updatedRequests = projectData.collaborate_requests.filter(
+        (email: string) => email !== acceptedEmail
+      );
+
+      // Add the email to acceptedCollaboration
+      const updatedAccepted = projectData.acceptedCollaboration
+        ? [...projectData.acceptedCollaboration, acceptedEmail]
+        : [acceptedEmail];
+
+      // Update the document
+      await updateDoc(projectRef, {
+        collaborate_requests: updatedRequests,
+        acceptedCollaboration: updatedAccepted,
+      });
+
+      revalidatePath('/inbox');
+      return { success: true };
+    } else {
+      throw new Error("Project not found");
+    }
+  } catch (error) {
+    console.error("Error accepting collaboration request:", error);
+    return { success: false, error: "Failed to accept collaboration request" };
+  }
+}
+
+export async function getAcceptedCollaboration(projectId: string) {
+  try {
+    const projectRef = doc(db, "projects", projectId);
+    const projectSnap = await getDoc(projectRef);
+
+    if (projectSnap.exists()) {
+      const projectData = projectSnap.data();
+      const acceptedCollaboration = projectData.acceptedCollaboration || [];
+
+      // Console log all users in the acceptedCollaboration list
+      console.log("Accepted collaborators:");
+      acceptedCollaboration.forEach((user: string, index: number) => {
+        console.log(`${index + 1}. ${user}`);
+      });
+
+      return { success: true, acceptedCollaboration };
+    } else {
+      throw new Error("Project not found");
+    }
+  } catch (error) {
+    console.error("Error fetching accepted collaborations:", error);
+    return { success: false, error: "Failed to fetch accepted collaborations", acceptedCollaboration: [] };
   }
 }

@@ -45,11 +45,17 @@ export default function NewProjectForm() {
       return;
     }
     if (selectedInterests.length === 0) {
-      setFormState({ ok: false, message: "Please add at least one interest tag." });
+      setFormState({
+        ok: false,
+        message: "Please add at least one interest tag.",
+      });
       return;
     }
     if (selectedRoles.length === 0) {
-      setFormState({ ok: false, message: "Please add at least one open role." });
+      setFormState({
+        ok: false,
+        message: "Please add at least one open role.",
+      });
       return;
     }
     const formData = new FormData(event.target as HTMLFormElement);
@@ -121,7 +127,7 @@ export default function NewProjectForm() {
     event: FormEvent,
     { suggestion }: SuggestionSelectedEventData<string>
   ) => {
-    if (!selectedInterests.includes(suggestion)) {
+    if (!selectedInterests.includes(suggestion) && selectedInterests.length < 3) {
       setSelectedInterests([...selectedInterests, suggestion]);
       setInterest("");
     }
@@ -132,7 +138,7 @@ export default function NewProjectForm() {
     event: FormEvent,
     { suggestion }: SuggestionSelectedEventData<string>
   ) => {
-    if (!selectedRoles.includes(suggestion)) {
+    if (!selectedRoles.includes(suggestion) && selectedRoles.length < 3) {
       setSelectedRoles([...selectedRoles, suggestion]);
       setRole("");
     }
@@ -160,22 +166,35 @@ export default function NewProjectForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-4 w-one-third-width mx-auto rounded-3xl bg-white text-2xl p-10"
+      className="flex flex-col gap-4 w-half-screen-width mx-auto bg-white text-2xl p-10"
     >
       <div className="flex flex-col items-center">
-        <span className="font-bold">New Project Form</span>
+        <span className="font-bold text-5xl">Create Project</span>
       </div>
       <div className="flex flex-col">
         <label htmlFor="title" className="mb-2 font-bold">
-          Title:
+          Project Title:
         </label>
         <input
           type="text"
           id="title"
           name="title"
-          placeholder="Project Title"
+          placeholder="Your Project Title..."
           required
-          className="p-3 border-2 border-gray-200 rounded-2xl"
+          className="p-3 border-2 border-gray-200 rounded-lg"
+        />
+      </div>
+      <div className="flex flex-col">
+        <label htmlFor="description" className="mb-2 font-bold">
+          Description:
+        </label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Description your project..."
+          required
+          className="p-3 border-2 border-gray-200 rounded-lg"
+          rows={3}
         />
       </div>
       <div className="flex flex-col">
@@ -191,7 +210,7 @@ export default function NewProjectForm() {
           inputProps={{
             value: location,
             onChange: onLocationChange,
-            className: "p-3 border-2 border-gray-100 rounded-2xl w-full",
+            className: "p-3 border-2 border-gray-100 rounded-lg w-full",
             placeholder: "City, State, Country",
             onKeyDown: (e: KeyboardEvent) => {
               if (e.key === "Enter" && location) {
@@ -210,32 +229,21 @@ export default function NewProjectForm() {
         />
       </div>
       <div className="flex flex-col">
-        <label htmlFor="description" className="mb-2 font-bold">
-          Description:
-        </label>
-        <textarea
-          id="description"
-          name="description"
-          placeholder="Short Description"
-          required
-          className="p-3 border-2 border-gray-200 rounded-2xl"
-        />
-      </div>
-      <div className="flex flex-col">
         <label htmlFor="masterplan" className="mb-2 font-bold">
           Masterplan:
         </label>
         <textarea
           id="masterplan"
           name="masterplan"
-          placeholder="Hidden Description"
+          placeholder="Only members of your project can see this..."
           required
-          className="p-2 border-2 border-gray-200 rounded-2xl"
+          className="p-2 border-2 border-gray-200 rounded-lg"
+          rows={3}
         />
       </div>
       <div className="flex flex-col">
         <label htmlFor="interests" className="mb-2 font-bold">
-          Interests:
+          Tags:
         </label>
         <Autosuggest
           suggestions={suggestions}
@@ -246,13 +254,14 @@ export default function NewProjectForm() {
           inputProps={{
             value: interest,
             onChange: onChange,
-            className: "p-2 border-2 border-gray-100 rounded-2xl w-full",
-            placeholder: "Interest Tags",
+            className: "p-2 border-2 border-gray-100 rounded-lg w-full",
+            placeholder: "Tags to categorize your projects...",
             onKeyDown: (e: KeyboardEvent) => {
               if (
                 e.key === "Enter" &&
                 interest &&
-                !selectedInterests.includes(interest)
+                !selectedInterests.includes(interest) &&
+                selectedInterests.length < 3
               ) {
                 setSelectedInterests([...selectedInterests, interest]);
                 setInterest("");
@@ -272,12 +281,12 @@ export default function NewProjectForm() {
           {selectedInterests.map((interest) => (
             <div
               key={interest}
-              className="flex items-center bg-gray-200 p-2 rounded-2xl"
+              className="flex items-center bg-white border border-black p-4 rounded-full"
             >
               {interest}
               <button
                 type="button"
-                className="ml-2 text-red-500"
+                className="ml-2 text-black"
                 onClick={() => removeInterest(interest)}
               >
                 &times;
@@ -300,10 +309,15 @@ export default function NewProjectForm() {
           inputProps={{
             value: role,
             onChange: onRoleChange,
-            className: "p-2 border-2 border-gray-100 rounded-2xl w-full",
-            placeholder: "Open Roles",
+            className: "p-2 border-2 border-gray-100 rounded-lg w-full",
+            placeholder: "Open roles for your project...",
             onKeyDown: (e: KeyboardEvent) => {
-              if (e.key === "Enter" && role && !selectedRoles.includes(role)) {
+              if (
+                e.key === "Enter" &&
+                role &&
+                !selectedRoles.includes(role) &&
+                selectedRoles.length < 3
+              ) {
                 setSelectedRoles([...selectedRoles, role]);
                 setRole("");
                 e.preventDefault();
@@ -322,12 +336,12 @@ export default function NewProjectForm() {
           {selectedRoles.map((role) => (
             <div
               key={role}
-              className="flex items-center bg-gray-200 p-2 rounded-2xl"
+              className="flex items-center bg-white border border-black p-4 rounded-full"
             >
               {role}
               <button
                 type="button"
-                className="ml-2 text-red-500"
+                className="ml-2 text-black"
                 onClick={() => removeRole(role)}
               >
                 &times;
@@ -339,7 +353,7 @@ export default function NewProjectForm() {
 
       <button
         type="submit"
-        className="p-3 border-none rounded-2xl bg-gray-800 text-white cursor-pointer w-full"
+        className="p-3 border-none rounded-lg bg-gray-800 text-white cursor-pointer w-full"
       >
         Add Project
       </button>

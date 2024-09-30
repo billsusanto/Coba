@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Project } from '../app/types/project';
-import { requestToCollaborate } from '../app/actions/collaborate';
+import { requestToCollaborate, getAcceptedCollaboration } from '../app/actions/collaborate';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
@@ -11,6 +11,21 @@ interface ProjectPageProps {
 const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
   const { data: session } = useSession();
   const [isClicked, setIsClicked] = useState(false);
+  const [isCollaborator, setIsCollaborator] = useState(false);
+
+  useEffect(() => {
+    const checkCollaborationStatus = async () => {
+      if (project && session?.user?.email) {
+        const { success, acceptedCollaboration } = await getAcceptedCollaboration(project.id);
+        if (success) {
+          setIsCollaborator(acceptedCollaboration.includes(session.user.email));
+        }
+      }
+    };
+
+    checkCollaborationStatus();
+  }, [project, session]);
+
   const openRoles = project?.openRoles || [];
   const displayOpenRoles = openRoles.length > 2 ? `${openRoles.slice(0, 2).join(', ')}, +${openRoles.length - 2} more` : openRoles.join(', ');
 
@@ -85,7 +100,9 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
             <hr className="my-8 border-t-2 border-gray-200"/>
             <div className="mb-4">
               <h3 className="text-3xl font-bold mb-2">Masterplan:</h3>
-              <p className='text-2xl text-gray-600 blur-section'>{project.masterplan || "No masterplan available"}</p>
+              <p className={`text-2xl text-gray-600 ${isCollaborator ? '' : 'blur-section'}`}>
+                {project.masterplan || "No masterplan available"}
+              </p>
             </div>
           </>
         ) : (

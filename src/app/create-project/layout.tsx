@@ -12,7 +12,7 @@ export default function RootLayout({
       <body>
         <Toaster position="top-center" />
         <ClientProvider>
-          <div className="flex w-screen min-h-screen">
+          <div className="flex w-screen h-screen">
             <Sidebar />
             {children}
           </div>

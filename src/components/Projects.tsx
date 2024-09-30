@@ -28,7 +28,7 @@ export default function Projects({ projects, initialSelectedProject }: ProjectsP
   return (
     <div className="flex w-full bg-white">
       <div className="flex-1 flex flex-col pt-5">
-        <div className="flex justify-between items-center pb-5 px-10">
+        <div className="flex justify-between items-center pb-3 px-10">
           <SearchBar />
           <Link href="/create-project">
             <div className="bg-gray-800 text-white text-xl h-14 w-56 px-4 py-2 rounded-lg flex items-center justify-center ml-4">
@@ -36,6 +36,7 @@ export default function Projects({ projects, initialSelectedProject }: ProjectsP
             </div>
           </Link>
         </div>
+        
         <section className="flex w-full h-projectPage">
           <div className="w-3/10 h-full overflow-y-auto">
             <div className="container">

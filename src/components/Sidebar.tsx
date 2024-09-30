@@ -13,7 +13,7 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="w-16 sm:w-20 md:w-48 lg:w-64 h-screen bg-gray-sidebar flex flex-col flex-shrink-0 p-2 sm:p-3 md:p-4 lg:p-5">
+    <div className="w-64 h-screen bg-gray-sidebar flex flex-col flex-shrink-0 p-2 sm:p-3 md:p-4 lg:p-5">
       <Link href="/" className="text-5xl text-white p-10 flex justify-center">
         Coba.
       </Link>

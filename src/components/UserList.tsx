@@ -43,8 +43,8 @@ export default function UserList() {
 
   return (
     <div className="flex size-full">
-      <main className="px-10 flex-1">
-        <h1 className="text-3xl font-bold mb-5">All Users</h1>
+      <main className="px-10 pt-12 flex-1">
+        <h1 className="text-5xl font-bold mb-5">All Users</h1>
         {users.length === 0 ? (
           <p>No users found.</p>
         ) : (

@@ -47,7 +47,6 @@ export async function getFriends(userId: string) {
         const userData = userSnap.data();
         const friendList = userData.friend_list || [];
         
-        // Map to an array of objects with `id` and `email` (assuming friend IDs are email addresses)
         const friends = friendList.map((email: string) => ({ id: email, email }));
         
         return { ok: true, friends };
