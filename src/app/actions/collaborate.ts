@@ -106,12 +106,6 @@ export async function getAcceptedCollaboration(projectId: string) {
       const projectData = projectSnap.data();
       const acceptedCollaboration = projectData.acceptedCollaboration || [];
 
-      // Console log all users in the acceptedCollaboration list
-      console.log("Accepted collaborators:");
-      acceptedCollaboration.forEach((user: string, index: number) => {
-        console.log(`${index + 1}. ${user}`);
-      });
-
       return { success: true, acceptedCollaboration };
     } else {
       throw new Error("Project not found");

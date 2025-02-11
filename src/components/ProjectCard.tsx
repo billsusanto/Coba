@@ -29,7 +29,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     return (
       <div className="">
         <Link href="/create-project">
-          <div className="border-2 border-dotted border-gray-700 bg-gray-100 flex justify-center items-center rounded-xl shadow-md hover:shadow-xl transform transition-all w-[20vw] h-[26vh]">
+          <div
+            className="border-2 border-dotted border-gray-700 bg-gray-100 flex justify-center items-center rounded-xl shadow-md hover:shadow-xl transform transition-all
+              w-[80vw] h-auto
+              sm:w-[90vw] sm:h-[250px]
+              md:w-[45vw] md:h-[275px]
+              lg:w-[25vw] lg:h-[300px]
+              xl:w-[25vw] xl:h-[300px]
+              2xl:w-[25vw] 2xl:h-[300px]"
+          >
             <SquarePlus size={96} className="text-gray-300" />
           </div>
         </Link>
@@ -71,24 +79,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   // const interestsList = interests.join(", ");
 
   return (
-    <div
-      className={`bg-gray-50 shadow-md rounded-lg border border-gray-300 flex flex-col hover:shadow-xl transform transition-all cursor-pointer w-[20vw] h-[300px] ${scrollClass}`}
-    >
-      <div className="pl-10 pt-10 pr-10 flex-grow">
+    <div className={`bg-gray-50 shadow-md rounded-lg border border-gray-300 flex flex-col hover:shadow-xl transform transition-all cursor-pointer w-[25vw] h-[31vh] ${scrollClass}`}>
+      <div className="px-10 pt-10 flex-1">
         <div className="font-bold text-3xl">{project?.title}</div>
         <div className="mb-2 text-lg text-gray-500">{project?.location}</div>
         {interests.length > 0 &&
           interests.some((interest) => interest.trim() !== "") && (
-            <div className="mb-4 text-xl">
+            <div className="text-xl">
               Interests:
               <div className="flex flex-wrap gap-2 mt-2">
                 {interests
                   .filter((interest) => interest.trim() !== "")
-                  .flatMap((interest) => interest.split(',')) 
+                  .flatMap((interest) => interest.split(","))
                   .map((interest, index) => (
                     <span
                       key={index}
-                      className="inline-block px-4 py-2 border border-black rounded-full text-black text-base font-sm hover:bg-black hover:text-white transition-colors duration-200"
+                      className="inline-block px-4 py-2 border border-black rounded-full text-black text-sm font-sm hover:bg-black hover:text-white transition-colors duration-200"
                     >
                       {interest.trim()}
                     </span>
@@ -97,15 +103,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             </div>
           )}
       </div>
-      <div className="flex items-center text-xl px-10 py-4 rounded-b-xl">
-        <span className="mr-2 text-xl">By:</span>
-        <Image
-          src={project?.authorImage || "/default-avatar.png"}
-          alt="Author Image"
-          width={60}
-          height={60}
-          className="rounded-full mr-2"
-        />
+      <div className="flex items-center text-xl px-10 py-4 rounded-b-xl mt-auto">
+        <span className="mr-2 text-lg">By:</span>
         <div>
           <span>{project?.author}</span>
         </div>

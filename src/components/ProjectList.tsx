@@ -26,7 +26,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({
 
   return (
     <ul
-      className={`flex w-full ${scrollClass} list-none h-full rounded-md`}
+      className={`flex w-full ${scrollClass} list-none h-full rounded-md pt-6 sm:pt-0`}
     >
       {projects.map((project) => (
         <li

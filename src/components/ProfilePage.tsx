@@ -72,25 +72,25 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="flex h-full px-3">
-      <div className="flex-1">
-        <div className="bg-white p-10 w-full">
+    <div className="flex h-[45vh]">
+      <div className="flex-1 h-full pl-9 pb-16">
+        <div className="bg-gray-50 h-full border border-gray-300 rounded-lg shadow-xl w-full">
           <div className="flex items-center">
-            <Image
+            {/* <Image
               src="/default-avatar.png"
               alt="Profile Image"
               width={72}
               height={72}
               className="w-36 h-36 rounded-full"
-            />
-            <div className="ml-6">
+            /> */}
+            <div className="mt-8 ml-10 space-y-3">
               <input
                 type="text"
                 name="name"
                 placeholder={session.user?.name || "Enter your name"}
                 value={user?.name ?? ""}
                 onChange={handleChange}
-                className="text-3xl font-bold text-black w-full mt-2 p-2 rounded-lg"
+                className="bg-gray-50 text-3xl font-bold text-black w-full mt-2 p-2 rounded-lg"
               />
               <input
                 type="text"
@@ -98,7 +98,7 @@ const ProfilePage = () => {
                 placeholder="Enter your school"
                 value={user?.school ?? ""}
                 onChange={handleChange}
-                className="text-lg font-semibold text-black w-full p-2 rounded-lg"
+                className="bg-gray-50 text-lg font-semibold text-black w-full p-2 rounded-lg"
               />
               <input
                 type="text"
@@ -106,7 +106,7 @@ const ProfilePage = () => {
                 placeholder="Enter your major"
                 value={user?.major ?? ""}
                 onChange={handleChange}
-                className="text-lg text-gray-500 w-full p-2 rounded-lg"
+                className="bg-gray-50 text-lg text-gray-500 w-full p-2 rounded-lg"
               />
             </div>
           </div>
@@ -114,7 +114,7 @@ const ProfilePage = () => {
             onSubmit={handleSubmit}
             className="mt-10 rounded-xl h-profilePage relative"
           >
-            <div className="pt-4">
+            <div className="px-10">
               <label className="block text-3xl font-bold mb-2">Socials:</label>
               <input
                 type="text"
@@ -125,7 +125,7 @@ const ProfilePage = () => {
                 className="w-full p-2 border rounded-lg text-xl"
               />
             </div>
-            <div className="absolute bottom-6 right-6">
+            <div className="absolute bottom-20 right-10">
               <button
                 type="submit"
                 className="bg-blue-500 text-white py-2 px-4 rounded-lg"

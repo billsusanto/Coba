@@ -31,11 +31,16 @@ const config: Config = {
         'search-bar': '30vw',
         'half-screen-width' : '50vw',
         'one-third-width' : '45%',
-        'projectPage': '63vw',
+        'projectPage': '55vw',
         'profilePage': '85vw',
       },
       boxShadow: {
         'blueShadow': '0 8px 20px 5px rgba(66, 153, 225, 0.5), 0 4px 8px 5px rgba(66, 153, 225, 0.3)',
+      },
+      padding: {
+        '1vw': '1vw',
+        '2vw': '2vw',
+        '3vw': '3vw',
       },
     },
   },

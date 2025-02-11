@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Project } from '../app/types/project';
-import { requestToCollaborate, getAcceptedCollaboration } from '../app/actions/collaborate';
-import { useSession } from 'next-auth/react';
-import Image from 'next/image';
+import React, { useState, useEffect } from "react";
+import { Project } from "../app/types/project";
+import {
+  requestToCollaborate,
+  getAcceptedCollaboration,
+} from "../app/actions/collaborate";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 interface ProjectPageProps {
   project: Project | null;
@@ -16,7 +19,8 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
   useEffect(() => {
     const checkCollaborationStatus = async () => {
       if (project && session?.user?.email) {
-        const { success, acceptedCollaboration } = await getAcceptedCollaboration(project.id);
+        const { success, acceptedCollaboration } =
+          await getAcceptedCollaboration(project.id);
         if (success) {
           setIsCollaborator(acceptedCollaboration.includes(session.user.email));
         }
@@ -27,48 +31,54 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
   }, [project, session]);
 
   const openRoles = project?.openRoles || [];
-  const displayOpenRoles = openRoles.length > 2 ? `${openRoles.slice(0, 2).join(', ')}, +${openRoles.length - 2} more` : openRoles.join(', ');
+  const displayOpenRoles =
+    openRoles.length > 2
+      ? `${openRoles.slice(0, 2).join(", ")}, +${openRoles.length - 2} more`
+      : openRoles.join(", ");
 
   const interests = project?.interests || [];
-  const interestsList = interests.join(', ');
+  const interestsList = interests.join(", ");
 
   const handleCollaborateClick = async () => {
     if (!project || !session || !session.user) {
-      console.error('Project or user information is missing');
+      console.error("Project or user information is missing");
       return;
     }
 
     try {
       if (!session.user?.email) {
-        throw new Error('User email is missing');
+        throw new Error("User email is missing");
       }
-      const response = await requestToCollaborate(project.id, session.user.email);
+      const response = await requestToCollaborate(
+        project.id,
+        session.user.email
+      );
       if (response.success) {
-        alert('Collaboration request sent successfully!');
+        alert("Collaboration request sent successfully!");
       } else {
-        alert('Failed to send collaboration request.');
+        alert("Failed to send collaboration request.");
       }
     } catch (error) {
-      console.error('Error sending collaboration request:', error);
-      alert('An error occurred while sending the collaboration request.');
+      console.error("Error sending collaboration request:", error);
+      alert("An error occurred while sending the collaboration request.");
     }
   };
 
   return (
-    <div className="w-projectPage h-projectPage">
-      <div className="bg-gray-50 border border-gray-300 rounded-lg shadow-xl p-10 pt-7 h-full">
+    <div className="hidden md:flex lg:flex w-[55vw] h-[80vh]">
+      <div className="flex-1 bg-gray-50 border border-gray-300 rounded-lg shadow-xl p-10 pt-7 h-full">
         {project ? (
           <>
             <h2 className="text-6xl font-bold mb-4">{project.title}</h2>
             <p className="text-xl text-gray-600 mb-2">{project.location}</p>
             <div className="flex items-center mb-4">
-              <Image
+              {/* <Image
                 src={project.authorImage || '/default-avatar.png'}
                 alt="Author Image"
                 width={48}
                 height={48}
                 className="rounded-full mr-4 w-12 h-12"
-              />
+              /> */}
               <div>
                 <p className="text-xl font-bold">{project.author}</p>
                 <p className="text-gray-600">{project.authorTitle}</p>
@@ -84,23 +94,31 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => {
                 {isClicked ? "Sent" : "Collaborate"}
               </button>
             </div>
-            <hr className="my-8 border-t-2 border-gray-200"/>
+            <hr className="my-8 border-t-2 border-gray-200" />
             <div className="mb-4">
               <h3 className="text-3xl font-bold mb-2">Project Description:</h3>
-              <p className='text-2xl text-gray-600'>{project.description}</p>
+              <p className="text-2xl text-gray-600">{project.description}</p>
             </div>
             <div className="mb-4">
               <h3 className="text-3xl font-bold mb-2">Open Positions:</h3>
-              <p className='text-2xl text-gray-600'>{displayOpenRoles || "No open positions"}</p>
+              <p className="text-2xl text-gray-600">
+                {displayOpenRoles || "No open positions"}
+              </p>
             </div>
             <div className="mb-4">
               <h3 className="text-3xl font-bold mb-2">Tags:</h3>
-              <p className='text-2xl text-gray-600'>{interestsList || "No tags"}</p>
+              <p className="text-2xl text-gray-600">
+                {interestsList || "No tags"}
+              </p>
             </div>
-            <hr className="my-8 border-t-2 border-gray-200"/>
+            <hr className="my-8 border-t-2 border-gray-200" />
             <div className="mb-4">
               <h3 className="text-3xl font-bold mb-2">Masterplan:</h3>
-              <p className={`text-2xl text-gray-600 ${isCollaborator ? '' : 'blur-section'}`}>
+              <p
+                className={`text-2xl text-gray-600 ${
+                  isCollaborator ? "" : "blur-section"
+                }`}
+              >
                 {project.masterplan || "No masterplan available"}
               </p>
             </div>

@@ -2,36 +2,45 @@
 import React from "react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { House, FolderGit2, UsersRound, Inbox } from "lucide-react";
+import { House, FolderGit2, UsersRound, Inbox, X } from "lucide-react";
 import Image from "next/image";
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<{ isVisible: boolean; toggleSidebar: () => void }> = ({
+  isVisible,
+  toggleSidebar,
+}) => {
   const { data: session, status } = useSession();
+
   const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     await signOut({ callbackUrl: "/projects" });
   };
 
   return (
-    <div className="w-64 h-screen bg-gray-sidebar flex flex-col flex-shrink-0 p-2 sm:p-3 md:p-4 lg:p-5">
+    <div
+      className={`fixed lg:relative z-50 transform ${
+        isVisible ? "translate-x-0 w-screen sm:w-[20vw] md:w-[20vw] lg:w-[20vw] 2xl:w-[20vw]" : "-translate-x-full"
+      } transition-transform duration-300 lg:translate-x-0 lg:static h-[100vh] bg-gray-sidebar flex flex-col flex-shrink-0 p-[1vw] sm:p-[1vw] md:p-[1vw] lg:p-[1.5vw]`}
+    >
+      {/* Close Button for small devices */}
+      <div className="lg:hidden flex justify-end p-4">
+        <X className="text-white cursor-pointer" size={30} onClick={toggleSidebar} />
+      </div>
       <Link href="/" className="text-5xl text-white p-10 flex justify-center">
         Coba.
       </Link>
-      {/* <Link href="/home" className="text-2xl text-white p-7 m-2 rounded-xl hover:bg-gray-sidebar-hover flex items-center">
-        <House className="mr-4" /> Home
-      </Link> */}
       <Link
         href="/projects"
         className="text-2xl text-white p-7 m-2 rounded-xl hover:bg-gray-sidebar-hover flex items-center"
       >
         <FolderGit2 className="mr-4" /> Projects
       </Link>
-      <Link
+      {/* <Link
         href="/users"
         className="text-2xl text-white p-7 m-2 rounded-xl hover:bg-gray-sidebar-hover flex items-center"
       >
         <UsersRound className="mr-4" /> Users
-      </Link>
+      </Link> */}
       <Link
         href="/inbox"
         className="text-2xl text-white p-7 m-2 rounded-xl hover:bg-gray-sidebar-hover flex items-center"
@@ -43,28 +52,26 @@ const Sidebar: React.FC = () => {
         {status === "authenticated" ? (
           <>
             <Link href="/my-profile">
-              <div className="flex items-center text-white text-xl mb-10 w-full">
-                <Image
+              <div className="flex justify-center items-center text-white text-xl mb-5 w-full">
+                {/* <Image
                   src="/default-avatar.png"
                   alt="User Avatar"
                   width={32}
                   height={32}
                   className="w-12 h-12 rounded-full mr-3"
-                />
-                <span>
-                  {session.user?.name ? session.user.name : session.user?.email}
-                </span>
+                /> */}
+                <span>{session.user?.name || session.user?.email}</span>
               </div>
               <button
                 onClick={handleLogout}
-                className="bg-gray-sidebar border border-white text-white rounded-xl px-4 py-3 sm:w-full md:w-full text-center text-xl flex items-center justify-center"
+                className="bg-gray-sidebar border border-white text-white rounded-xl px-4 py-2 sm:w-full md:w-full text-center text-lg flex items-center justify-center"
               >
                 <Image
                   src="/Logout.png"
                   alt="Logout"
                   width={6}
                   height={6}
-                  className="w-6 h-6 mr-4"
+                  className="w-4 h-4 mr-2"
                 />
                 Logout
               </button>

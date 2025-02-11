@@ -20,10 +20,11 @@ export default function Profile({ projects }: { projects: Project[] }) {
   }, [projects]);
 
   return (
-    <div className="flex w-full bg-white">
+    <div className="flex h-full w-full bg-white pr-2vw">
       <div className="flex-grow overflow-auto flex flex-col pt-5">
-        <div className="flex justify-between items-center pb-5 px-10">
-          <SearchBar />
+        <div className="flex justify-between items-center pb-3">
+          {/* <SearchBar /> */}
+          <div className="flex items-center w-[50vw] py-10"></div>
           <Link href="/create-project">
             <div className="bg-gray-800 text-white text-xl h-14 w-56 px-4 py-2 rounded-lg flex items-center justify-center ml-4">
               Create Project +

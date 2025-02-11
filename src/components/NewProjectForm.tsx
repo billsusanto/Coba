@@ -166,7 +166,7 @@ export default function NewProjectForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-4 w-half-screen-width mx-auto bg-white text-2xl p-10"
+      className="flex flex-col gap-4 w-half-screen-width mx-auto bg-white text-xl p-10"
     >
       <div className="flex flex-col items-center">
         <span className="font-bold text-5xl">Create Project</span>
@@ -357,11 +357,11 @@ export default function NewProjectForm() {
       >
         Add Project
       </button>
-      {formState && (
+      {/* {formState && (
         <p className={formState.ok ? "text-green-500" : "text-red-500"}>
           {formState.message}
         </p>
-      )}
+      )} */}
     </form>
   );
 }
