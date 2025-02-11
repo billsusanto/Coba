@@ -1,4 +1,5 @@
 "use client";
+
 import ClientProvider from "@/src/components/ClientProvider";
 import Sidebar from "@/src/components/Sidebar";
 import { Toaster } from "sonner";
